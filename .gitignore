@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.vercel
+*.tsbuildinfo
+.env*.local
+.about-visual-qa*/
+.footer-qa-*/
+.hero-qa-profile/
+*-desktop.png
+*-mobile.png
+*-full.png
+*-qa.png
+AFT.mp4

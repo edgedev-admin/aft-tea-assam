@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import { AftPage, AftSection, CardGrid, PageCta } from "../../components/aft-page";
+import { EnquiryForm } from "../../components/enquiry-form";
+export const metadata: Metadata = { title: "Wholesale Enquiries | AFT Tea Factory", description: "Begin a wholesale or business enquiry with AFT Tea Factory." };
+const cards=[{eyebrow:"Tea interest",title:"Assam Black Tea",text:"Discuss your business requirements with the AFT team."},{eyebrow:"Tea interest",title:"Speciality Tea",text:"For buyers seeking distinctive Assam tea expressions."},{eyebrow:"Tea interest",title:"Golden Pearl",text:"AFT’s handmade speciality tea story."}];
+export default function WholesalePage(){return <AftPage kicker="For Buyers" title="A business conversation\nabout Assam tea." intro="AFT welcomes enquiries from businesses interested in Assam black tea, speciality tea and its distinctive tea collection." image="/images/tea/product-2.jpg"><AftSection kicker="Our tea categories" title="Start with your interest."><CardGrid cards={cards}/></AftSection><AftSection kicker="Wholesale enquiry" title="Tell us about your requirement." text="This form records no message yet; a backend or email-delivery integration is still required before enquiries can be sent."><EnquiryForm wholesale/></AftSection><PageCta title="Partner with AFT."/></AftPage>}

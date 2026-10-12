@@ -6,12 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import "../app/hero.css";
+import "../app/navbar-polish.css";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Our Teas", href: "/teas" },
-  { label: "Our Craft", href: "/craft" },
+  { label: "Our Products", href: "/teas" },
 ];
 const mobileLinks = [
   ...links,
@@ -52,7 +52,7 @@ export function SiteNavbar() {
     <div className="nav-shell">
       <Link className="brand" href="/" aria-label="AFT Techno Trade home">
         <span className="brand-logo" aria-hidden="true"><Image src="/aft-tea-factory-logo.png" alt="" width={120} height={120} priority /></span>
-        <span>AFT Tea Factory<small>AFT Techno Trade</small></span>
+        <span>AFT Techno Trade</span>
       </Link>
       <nav aria-label="Primary navigation">
         {links.map((link) => <Link className={pathname === link.href ? "active" : ""} href={link.href} key={link.label}>{link.label}</Link>)}

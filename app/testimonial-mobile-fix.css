@@ -1,0 +1,13 @@
+/* Imported by the carousel component after its base stylesheet. */
+@media(max-width:600px){
+  .aft-testimonials .testimonial-carousel{height:auto;min-height:0;padding:28px 18px 82px;overflow:hidden}
+  .aft-testimonials .testimonial-track.responsive-testimonial-track{position:relative;top:auto;left:auto;display:flex;width:100%;max-width:100%;gap:0;transform:none!important}
+  .aft-testimonials .testimonial-track.responsive-testimonial-track .testimonial-card{display:none;box-sizing:border-box;width:100%;max-width:100%;min-width:0;min-height:322px;flex:0 0 100%;padding:29px 22px;opacity:1}
+  .aft-testimonials .testimonial-track.responsive-testimonial-track .testimonial-card.is-active{display:block}
+  .aft-testimonials .testimonial-card>p{font-size:15px;line-height:1.6;overflow-wrap:normal;word-break:normal}
+  .aft-testimonials .carousel-control{top:auto;bottom:17px}
+  .aft-testimonials .previous{left:calc(50% - 62px)}
+  .aft-testimonials .next{right:calc(50% - 62px)}
+}
+
+.testimonial-card>.testimonial-status{display:inline-flex;align-items:center;min-height:26px;margin:0;color:#668746;font:700 9px/1.2 var(--font-sans),Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}

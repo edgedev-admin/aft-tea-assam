@@ -1,9 +1,9 @@
 /* Mobile-specific safeguards: size content by its container, never the viewport. */
-body{overflow-x:visible}
+body{overflow-x:clip}
 img,video{max-width:100%}
 .aft-page-container,.about-shell,.services-shell,.why-shell,.testimonials-shell,.faq-shell,.aft-contact-wrap,.footer-shell,.nav-shell,.hero-shell,.editorial-grid,.aft-card-grid,.faq-grid,.footer-grid,.aft-contact-wrap{min-width:0}
 .aft-card,.faq-contact,.faq-item,.testimonial-card,.aft-contact-copy,.aft-contact-visual,.footer-column,.newsletter-copy,.footer-consultation{min-width:0}
-.responsive-testimonial-track{transform:translateX(calc(50% - var(--track-offset)))!important}
+.responsive-testimonial-track{transform:translateX(calc(var(--slide-index) * -33.333333%))!important}
 @media(max-width:600px){.testimonial-carousel{touch-action:pan-y}}
-@media(max-width:440px){.milestone-strip{grid-template-columns:1fr;padding:12px;margin-bottom:34px;gap:0}.milestone-strip article,.milestone-strip article:nth-child(-n+2){min-width:0;padding:14px 8px;border-right:0;border-bottom:1px solid #dce2c9}.milestone-strip article:last-child{border-bottom:0}.milestone-strip article>span{width:44px;height:44px;flex-basis:44px}.milestone-strip strong{font-size:clamp(21px,7vw,27px);white-space:normal;overflow-wrap:anywhere}.milestone-strip p{font-size:10px;overflow-wrap:anywhere}}
+@media(max-width:440px){.milestone-strip{grid-template-columns:1fr;padding:12px;margin-bottom:34px;gap:0}.milestone-strip article,.milestone-strip article:nth-child(-n+2){min-width:0;padding:14px 8px;border-right:0;border-bottom:1px solid #dce2c9}.milestone-strip article:last-child{border-bottom:0}.milestone-strip article>span{width:44px;height:44px;flex-basis:44px}.milestone-strip strong{font-size:clamp(21px,7vw,27px);white-space:normal;overflow-wrap:normal}.milestone-strip p{font-size:10px;overflow-wrap:normal}}
 @media(max-width:380px){.aft-page-container{width:calc(100% - 32px)}.aft-page-hero{min-height:500px;padding-top:136px}.aft-page-hero h1{font-size:clamp(42px,14vw,52px)}.aft-page-section{padding:64px 0}.editorial-image{min-height:330px}.aft-gallery{grid-template-columns:1fr}.aft-gallery figure{min-height:220px}.aft-enquiry-form{padding:18px}.aft-page-cta{padding:64px 0}}

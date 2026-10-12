@@ -1,0 +1,4 @@
+/* Scoped contrast fixes for About-page controls and labels. */
+.about-page .about-hero-actions .outline:hover{border-color:#315329;background:#315329;color:#fff}
+.about-page .about-hero-actions a:focus-visible,.about-page .about-cta a:focus-visible{outline:3px solid #c9e39d;outline-offset:3px}
+.about-page .about-place .about-eyebrow{background:rgba(231,237,217,.96);color:#52753c}

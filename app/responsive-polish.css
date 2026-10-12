@@ -1,0 +1,92 @@
+/* Mobile-first corrections for the established AFT composition. */
+.hero-shell,.hero-copy,.hero-stats,.stat-row,.hero-stat{min-width:0}
+.hero-title-mobile{display:none}
+
+/* Hero actions retain their hierarchy while providing clear pointer and keyboard feedback. */
+.hero-page .quote-button,.hero-page .project-button{transition:background .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.hero-page .quote-button:hover{background:#75984d;box-shadow:0 9px 20px rgba(3,20,9,.28);transform:translateY(-2px)}
+.hero-page .project-button:hover{border-color:rgba(231,244,209,.75);background:rgba(108,142,70,.36);box-shadow:0 9px 20px rgba(3,20,9,.22);transform:translateY(-2px)}
+.hero-page .quote-button:active,.hero-page .project-button:active{transform:translateY(0)}
+.hero-page .quote-button:focus-visible,.hero-page .project-button:focus-visible{outline:3px solid #c5e58b;outline-offset:3px}
+
+@media(max-width:860px){
+  .site-header .brand{min-width:0;flex:1}
+  .site-header .brand>span:not(.brand-logo){min-width:0;max-width:12ch}
+  .site-header .brand small{white-space:normal;letter-spacing:.25em}
+  .hero-page .hero,.hero-shell{min-height:auto}
+  .hero-shell{padding:0 0 36px}
+  .hero-page .hero-copy{width:100%;max-width:38rem;padding-top:clamp(128px,27vw,172px)}
+  .hero-page h1{font-size:clamp(44px,13.1vw,60px);line-height:1.01}
+  .hero-page .lede{max-width:35rem;font-size:clamp(14px,3.8vw,16px);line-height:1.65}
+  .hero-page .actions{flex-wrap:wrap;gap:10px}
+  .quote-button,.project-button{min-height:46px;padding:0 19px}
+  .social-proof{margin-top:34px}
+  .hero-stats{position:relative;right:auto;bottom:auto;width:100%;margin-top:32px;padding:18px 14px 16px}
+  .stat-row{gap:0;padding-bottom:17px}
+  .hero-stat{min-width:0;padding:0 4px}
+  .hero-stat strong{font-size:clamp(22px,6.8vw,28px);white-space:nowrap}
+  .hero-stat small{max-width:100%;white-space:normal;font-size:9px;line-height:1.3}
+  .stat-message{padding:15px 3px 0}
+  .stat-message p{font-size:11px}
+}
+
+@media(max-width:480px){
+  .nav-shell,.site-header.is-scrolled .nav-shell{width:calc(100% - 24px);padding:0 10px 0 13px}
+  .site-header .brand-logo{width:40px;height:40px;flex-basis:40px}
+  .site-header .brand>span:not(.brand-logo){max-width:11ch;font-size:clamp(16px,5.5vw,20px)}
+  .site-header .brand small{font-size:6px;letter-spacing:.22em}
+  .site-header .menu{width:42px;height:42px;flex:0 0 42px}
+  .nav-shell,.hero-shell{width:calc(100% - 32px)}
+  .hero-page .hero-copy{padding-top:126px}
+  .hero-title-desktop{display:none}
+  .hero-title-mobile{display:block}
+  .hero-page .eyebrow{font-size:9px;line-height:1.45;margin-bottom:24px}
+  .hero-page h1{font-size:clamp(40px,11.3vw,44px);line-height:1.02}
+  .hero-page .lede{margin:24px 0 27px;font-size:13px;line-height:1.62}
+  .hero-page .actions{display:grid;grid-template-columns:1fr;gap:9px}
+  .quote-button,.project-button{justify-content:center;width:100%;min-height:44px}
+  .social-proof{align-items:center;margin-top:36px}
+  .social-proof p{min-width:0;margin-left:14px;font-size:11px;line-height:1.32}
+  .hero-page .hero-stats{margin-top:28px;padding:19px 18px 18px}
+  .hero-page .hero-stats .stat-row{display:grid;grid-template-columns:1fr;gap:13px;padding:0 0 18px}
+  .hero-page .hero-stats .hero-stat,.hero-page .hero-stats .hero-stat-3{display:grid;grid-template-columns:42px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:13px;padding:0;text-align:left}
+  .hero-page .hero-stats .hero-stat .stat-icon{grid-column:1;grid-row:1 / span 2}
+  .hero-page .hero-stats .hero-stat strong{grid-column:2;grid-row:1;margin:0;font-size:22px;line-height:1;white-space:nowrap}
+  .hero-page .hero-stats .hero-stat small{grid-column:2;grid-row:2;margin-top:4px;font-size:10px;line-height:1.35}
+  .hero-page .hero-stats .stat-message{padding:16px 1px 0}
+  .stat-message p{font-size:10px;line-height:1.5}
+}
+
+@media(max-width:350px){
+  .site-header .brand>span:not(.brand-logo){font-size:16px}
+  .hero-page .actions{align-items:stretch;flex-direction:column}
+  .quote-button,.project-button{justify-content:center;width:100%}
+  .avatars{padding-top:2px}
+  .social-proof p{margin-left:10px}
+}
+
+/* The track has three equal slides; movement is based on its own width. */
+body .testimonial-carousel{height:auto;min-height:410px;padding:44px 52px;overflow:hidden}
+body .testimonial-track{position:relative;top:auto;left:auto;width:300%;gap:0;transform:translateX(calc(var(--slide-index,0) * -33.333333%));transition:transform .45s ease}
+body .testimonial-card{width:33.333333%;min-height:322px;flex:0 0 33.333333%;padding:35px 54px}
+.carousel-control{top:calc(50% - 20px)}
+
+@media(max-width:600px){
+  .aft-testimonials .testimonial-carousel{min-height:0;padding:28px 16px 80px}
+  .aft-testimonials .testimonial-track,.aft-testimonials .responsive-testimonial-track{position:relative;top:auto;left:auto;width:100%;transform:none!important}
+  .aft-testimonials .testimonial-card{display:none;width:100%;min-height:322px;padding:29px 18px;opacity:1}
+  .aft-testimonials .testimonial-card.is-active{display:block}
+  .aft-testimonials .testimonial-card>p{font-size:15px;line-height:1.5}
+  .aft-testimonials .carousel-control{top:auto;bottom:16px}
+  .aft-testimonials .previous{left:calc(50% - 62px)}.aft-testimonials .next{right:calc(50% - 62px)}
+}
+
+@media(max-width:440px){
+  .aft-testimonials .milestone-strip{grid-template-columns:minmax(0,1fr);padding:10px 12px;gap:0}
+  .aft-testimonials .milestone-strip article,.aft-testimonials .milestone-strip article:nth-child(-n+2){display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:12px;min-width:0;padding:14px 4px;border-right:0;border-bottom:1px solid #dce2c9}
+  .aft-testimonials .milestone-strip article:last-child{border-bottom:0}
+  .aft-testimonials .milestone-strip article>span{width:44px;height:44px;min-width:44px;flex-basis:auto}
+  .aft-testimonials .milestone-strip article>div{min-width:0}
+  .aft-testimonials .milestone-strip strong{font-size:clamp(20px,6vw,25px);line-height:1.02;white-space:normal;overflow-wrap:normal}
+  .aft-testimonials .milestone-strip p{font-size:10px;line-height:1.35;overflow-wrap:normal}
+}

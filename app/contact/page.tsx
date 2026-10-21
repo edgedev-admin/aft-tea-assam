@@ -1,13 +1,73 @@
 import type { Metadata } from "next";
-import { BriefcaseBusiness, Leaf, MapPin, MessageCircle, Sprout } from "lucide-react";
-import { SiteNavbar } from "../../components/site-navbar";
-import { SiteFooter } from "../../components/site-footer";
-import { FAQSection } from "../../components/faq-section";
+import { ArrowDown, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { ContactFaq } from "../../components/contact-faq";
 import { EnquiryForm } from "../../components/enquiry-form";
-import { Reveal, RevealImage } from "../../components/reveal";
-import "./contact.css";
+import { SiteFooter } from "../../components/site-footer";
+import { SiteNavbar } from "../../components/site-navbar";
+import { COMPANY_CONTACT } from "../../lib/company";
+import styles from "./contact.module.css";
+import "./contact-contrast.css";
 
-export const metadata: Metadata = { title: "Contact | AFT Tea Factory", description: "Contact AFT Tea Factory for business and product enquiries." };
-const features = [[Leaf, "Assam Tea Heritage", "Rooted in the tea-growing communities of Assam."], [Sprout, "Speciality Tea", "Enquire about our distinctive speciality offerings."], [BriefcaseBusiness, "Business Enquiries", "Discuss your product and supply requirements."], [MessageCircle, "Personal Response", "Share your needs so our team can understand your enquiry."]] as const;
+export const metadata: Metadata = {
+  title: { absolute: "Contact AFT Techno Trade | Tea Enquiries & Wholesale Supply" },
+  description: "Contact AFT Techno Trade in Upper Assam for tea collection enquiries, commercial Assam CTC supply, specialty tea, custom blending and wholesale discussions.",
+  alternates: { canonical: "/contact" },
+};
 
-export default function ContactPage() { return <><SiteNavbar/><main className="aft-contact-page"><section className="aft-contact-wrap"><div className="aft-contact-copy"><Reveal><p className="aft-contact-eyebrow"><Leaf size={12}/> Let&apos;s talk tea</p></Reveal><Reveal><h1>Ready to Discuss<br/>Your <i>Tea Requirements?</i></h1></Reveal><div className="aft-contact-divider"><span/><Leaf size={16}/><span/></div><Reveal delay={.12}><p className="aft-contact-intro">Whether you&apos;re exploring our Assam teas, speciality tea offerings or a business supply enquiry, we&apos;d be glad to hear from you.</p></Reveal><div className="aft-contact-features">{features.map(([Icon, title, text], index) => <Reveal className="aft-contact-feature" delay={.16 + index * .06} key={title}><span><Icon size={18}/></span><h2>{title}</h2><p>{text}</p></Reveal>)}</div><Reveal delay={.38}><div className="aft-contact-strip"><MapPin size={17}/><span><small>Based in Assam</small>Dikom/Lahowal area of Dibrugarh</span><i/><span><small>AFT Techno Trade</small>AFT Tea Factory</span></div></Reveal></div><RevealImage className="aft-contact-visual"><div className="aft-contact-photo"/><div className="aft-contact-shade"/><div className="aft-contact-form-card"><h2>Let&apos;s Start a Conversation</h2><p>Tell us a little about your requirements.</p><EnquiryForm variant="contact"/></div></RevealImage></section><FAQSection/></main><SiteFooter/></> }
+export default function ContactPage() {
+  return <>
+    <SiteNavbar />
+    <main id="main" className={`${styles.page} aft-contact-2-page`}>
+      <section className={styles.hero} aria-labelledby="contact-title">
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>Contact AFT Techno Trade</p>
+          <h1 id="contact-title">Good tea begins with a conversation.</h1>
+          <p className={styles.intro}>Whether you&apos;re exploring our tea collections, sourcing Assam tea for your business or looking for a specific blend, we&apos;re here to hear what you have in mind.</p>
+          <p className={styles.location}><MapPin size={17} aria-hidden="true" />Based in Dikom and Lahowal, near Dibrugarh, Upper Assam.</p>
+          <a className={styles.formJump} href="#enquiry-form">Start your enquiry <ArrowDown size={16} aria-hidden="true" /></a>
+        </div>
+
+        <div className={styles.formPanel} id="enquiry-form">
+          <div className={styles.formHeading}>
+            <div><span>Enquiry form</span><span>Fields marked required</span></div>
+            <h2>Tell us what you&apos;re looking for.</h2>
+            <p>Share a few details about your enquiry, and the AFT Techno Trade team can follow up with you.</p>
+          </div>
+          <EnquiryForm variant="contact" />
+        </div>
+      </section>
+
+      <section className={styles.contactBand} aria-labelledby="direct-contact-title">
+        <div className={styles.sectionShell}>
+          <div className={styles.contactIntro}>
+            <h2 id="direct-contact-title">A straightforward way to get in touch.</h2>
+            <p>Share your enquiry, tell us about the tea you&apos;re interested in, and include any relevant business requirements. This helps our team understand the conversation before following up.</p>
+          </div>
+          <address className={styles.contactDetails}>
+            <a href={COMPANY_CONTACT.phoneHref}><Phone size={18} aria-hidden="true" /><span><small>Phone</small>{COMPANY_CONTACT.phone}</span><ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a href={COMPANY_CONTACT.emailHref}><Mail size={18} aria-hidden="true" /><span><small>Email</small>{COMPANY_CONTACT.email}</span><ArrowUpRight size={16} aria-hidden="true" /></a>
+            <div><MapPin size={18} aria-hidden="true" /><span><small>Location</small>Dikom &amp; Lahowal, near Dibrugarh Airport<br />Dibrugarh, Assam, India, 786010</span></div>
+          </address>
+          <div className={styles.socials} aria-label="AFT Tea India social channels">
+            <span>Follow AFT Tea India</span>
+            <a href="https://www.instagram.com/aftteaindia/" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Instagram"><FaInstagram aria-hidden="true" /></a>
+            <a href="https://www.facebook.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Facebook"><FaFacebookF aria-hidden="true" /></a>
+            <a href="https://x.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on X"><FaXTwitter aria-hidden="true" /></a>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.faq} aria-labelledby="contact-faq-title">
+        <div className={styles.sectionShell}>
+          <header>
+            <h2 id="contact-faq-title">Useful details before you write.</h2>
+            <p>Short answers about enquiries, supply conversations and contacting the AFT team.</p>
+          </header>
+          <ContactFaq />
+        </div>
+      </section>
+    </main>
+    <SiteFooter />
+  </>;
+}

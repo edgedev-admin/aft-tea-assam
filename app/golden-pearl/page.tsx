@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
-import { AftPage, AftSection, EditorialPair, PageCta } from "../../components/aft-page";
-export const metadata: Metadata = { title: "Golden Pearl | AFT Tea Factory", description: "The story of AFT’s Golden Pearl handmade speciality Assam tea." };
-export default function GoldenPearlPage(){return <AftPage kicker="Speciality Assam Tea" title="Golden Pearl" intro="A handmade speciality Assam tea from Nahorchukbari, central to AFT Tea Factory’s ambition for distinctive tea." image="/images/tea/product-1.jpg"><AftSection kicker="A historic auction result" title="₹99,999 for 1 kg." text="In February 2022, one kilogram of Golden Pearl sold for ₹99,999 at the Guwahati Tea Auction Centre. This is a documented historical auction achievement, not a current retail price."><div className="aft-stat-strip"><article><b>1 KG</b><span>Golden Pearl sold at auction</span></article><article><b>₹99,999</b><span>Historical auction result</span></article><article><b>2022</b><span>Guwahati Tea Auction Centre</span></article></div></AftSection><EditorialPair reverse image="/images/tea/about-2.jpg" alt="Tea leaves" kicker="Nahorchukbari · Assam" title="A tea worth remembering." text="Golden Pearl reflects AFT’s speciality-tea ambition: taking Assam’s tea-growing tradition and exploring the potential for handmade teas that stand apart."/><PageCta title="Discuss Golden Pearl." text="For product and business enquiries about Golden Pearl, contact the AFT Tea Factory team."/></AftPage>}
+import { redirect } from "next/navigation";
+
+export default function GoldenPearlPage() {
+  redirect("/teas/golden-pearl");
+}

@@ -1,0 +1,414 @@
+.sequence {
+  --story-red: #a51f1a;
+  --story-yellow: #f8cf43;
+  --story-ink: #1d241f;
+  --story-header: 74px;
+  position: relative;
+}
+
+.shell {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.redStory {
+  position: relative;
+  min-height: 170svh;
+  background: var(--story-red);
+  color: #fff;
+}
+
+.storySticky {
+  position: sticky;
+  top: var(--story-header);
+  display: grid;
+  min-height: calc(100svh - var(--story-header));
+  align-items: center;
+  overflow: hidden;
+}
+
+.storySticky .shell {
+  padding: clamp(52px, 7vh, 86px) 0;
+}
+
+.eyebrow,
+.darkEyebrow,
+.collectionsHeading > p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: #ffd65c;
+}
+
+.eyebrow span,
+.date span {
+  margin: 0 0.45em;
+}
+
+.headline {
+  max-width: 1240px;
+  margin: clamp(22px, 3.4vh, 38px) 0 0;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: clamp(52px, 6.7vw, 100px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.headlineLine {
+  display: block;
+  text-wrap: balance;
+}
+
+.headlineChunk {
+  display: inline-block;
+}
+
+.storyFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 660px) max-content;
+  align-items: end;
+  gap: 30px clamp(32px, 6vw, 94px);
+  margin-top: clamp(30px, 5vh, 58px);
+}
+
+.storyFooter p {
+  margin: 0;
+  color: #fff4ef;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.65;
+}
+
+.storyFooter a,
+.achievementCopy a,
+.collectionList a {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.storyFooter a {
+  color: #fff;
+}
+
+.storyFooter a:hover svg,
+.storyFooter a:focus-visible svg,
+.achievementCopy a:hover svg,
+.achievementCopy a:focus-visible svg,
+.collectionList a:hover svg,
+.collectionList a:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+.storyFooter svg,
+.achievementCopy svg,
+.collectionList svg {
+  transition: transform 180ms ease;
+}
+
+.storyFooter a:focus-visible,
+.achievementCopy a:focus-visible,
+.collectionList a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+}
+
+.achievement {
+  position: relative;
+  background: var(--story-yellow);
+  color: var(--story-ink);
+  padding: clamp(78px, 9vw, 132px) 0 clamp(58px, 5vw, 76px);
+}
+
+.achievementGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: end;
+}
+
+.darkEyebrow,
+.collectionsHeading > p {
+  color: #66440d;
+}
+
+.stat {
+  margin: 20px 0 6px;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: clamp(72px, 10vw, 154px);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.stat span {
+  font-size: 0.28em;
+  font-weight: 800;
+}
+
+.statBlock small {
+  display: block;
+  margin-top: 16px;
+  color: #66440d;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.achievementCopy h2,
+.collectionsHeading h2 {
+  margin: 0;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.achievementCopy h2 {
+  max-width: 650px;
+  font-size: clamp(38px, 4.4vw, 64px);
+  line-height: 1;
+}
+
+.achievementCopy p {
+  max-width: 580px;
+  margin: 20px 0 0;
+  color: #493818;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.achievementCopy .date {
+  color: var(--story-ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.achievementCopy a {
+  margin-top: 26px;
+  color: var(--story-ink);
+}
+
+.collections {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(44px, 7vw, 94px);
+  margin-top: clamp(82px, 10vw, 142px);
+  padding-top: clamp(56px, 7vw, 88px);
+  border-top: 1px solid rgb(29 36 31 / 35%);
+}
+
+.collectionsHeading > p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.collectionsHeading h2 {
+  max-width: 510px;
+  font-size: clamp(38px, 4.8vw, 68px);
+  line-height: 1;
+}
+
+.collectionList {
+  display: grid;
+}
+
+.collectionList article {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.52fr) minmax(240px, 1fr);
+  gap: 10px 28px;
+  padding: 26px 0 28px;
+  border-top: 1px solid rgb(29 36 31 / 24%);
+}
+
+.collectionList article:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.collectionList h3 {
+  grid-row: 1 / span 2;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.collectionList p {
+  margin: 0;
+  color: #493818;
+  line-height: 1.58;
+}
+
+.collectionList a {
+  margin-top: 4px;
+  color: var(--story-ink);
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .sequence {
+    --story-header: 58px;
+  }
+
+  .redStory {
+    min-height: 160svh;
+  }
+
+  .storyFooter,
+  .achievementGrid,
+  .collections {
+    grid-template-columns: 1fr;
+  }
+
+  .storyFooter {
+    align-items: start;
+  }
+
+  .achievementGrid,
+  .collections {
+    gap: 44px;
+  }
+
+  .collectionList article {
+    grid-template-columns: minmax(150px, 0.45fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .shell {
+    width: calc(100% - 36px);
+  }
+
+  .redStory {
+    min-height: 154svh;
+  }
+
+  .storySticky .shell {
+    padding: clamp(38px, 6svh, 58px) 0;
+  }
+
+  .eyebrow,
+  .darkEyebrow,
+  .collectionsHeading > p {
+    font-size: 10px;
+  }
+
+  .headline {
+    margin-top: 20px;
+    font-size: clamp(36px, 11.2vw, 48px);
+    line-height: 0.97;
+  }
+
+  .storyFooter {
+    gap: 22px;
+    margin-top: 28px;
+  }
+
+  .storyFooter p {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .storyFooter a,
+  .achievementCopy a {
+    font-size: 12px;
+  }
+
+  .achievement {
+    padding: 68px 0 80px;
+  }
+
+  .achievementGrid,
+  .collections {
+    gap: 36px;
+  }
+
+  .stat {
+    margin-top: 16px;
+    font-size: clamp(60px, 19.5vw, 84px);
+  }
+
+  .achievementCopy h2,
+  .collectionsHeading h2 {
+    font-size: 38px;
+  }
+
+  .achievementCopy p {
+    font-size: 15px;
+  }
+
+  .collections {
+    margin-top: 72px;
+    padding-top: 52px;
+  }
+
+  .collectionList article {
+    display: block;
+    padding: 24px 0 26px;
+  }
+
+  .collectionList h3 {
+    margin-bottom: 9px;
+    font-size: 21px;
+  }
+
+  .collectionList p {
+    font-size: 14px;
+  }
+
+  .collectionList a {
+    margin-top: 13px;
+  }
+}
+
+@media (max-height: 680px) and (orientation: landscape) {
+  .storySticky .shell {
+    padding: 24px 0;
+  }
+
+  .headline {
+    margin-top: 14px;
+    font-size: clamp(42px, 7vw, 72px);
+  }
+
+  .storyFooter {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .redStory {
+    min-height: auto;
+  }
+
+  .storySticky {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+
+  .storySticky .shell {
+    padding: clamp(82px, 10vw, 132px) 0;
+  }
+
+  .headlineChunk {
+    color: #fff !important;
+  }
+
+  .storyFooter svg,
+  .achievementCopy svg,
+  .collectionList svg {
+    transition: none;
+  }
+}

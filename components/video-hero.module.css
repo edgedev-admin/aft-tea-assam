@@ -1,0 +1,32 @@
+:global(.video-hero) .headline {
+  width: min(100%, 1040px);
+  max-width: 1040px;
+  font-size: clamp(54px, 5.5vw, 84px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.line {
+  display: block;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  :global(.video-hero) .headline {
+    width: 100%;
+    font-size: 34px;
+    line-height: 1.04;
+  }
+}
+
+@media (max-width: 430px) {
+  :global(.video-hero) .headline {
+    font-size: 31px;
+  }
+}
+
+@media (max-width: 380px) {
+  :global(.video-hero) .headline {
+    font-size: 28px;
+  }
+}

@@ -1,32 +1,43 @@
 "use client";
 
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Mail, Menu, Phone, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { COMPANY_CONTACT } from "../lib/company";
+import { AnimatedBrandLogo } from "./animated-brand-logo";
 import "../app/hero.css";
 import "../app/navbar-polish.css";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Our Products", href: "/teas" },
+  { label: "Our Teas", href: "/teas" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Craft", href: "/craft" },
+  { label: "Wholesale", href: "/wholesale" },
 ];
 const mobileLinks = [
   ...links,
-  { label: "Golden Pearl", href: "/golden-pearl" },
-  { label: "Wholesale", href: "/wholesale" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Projects", href: "/projects" },
   { label: "Contact", href: "/contact" },
 ];
 const enquiryHref = "/contact";
 
 export function SiteNavbar() {
   const pathname = usePathname();
+  const hasLightHero = pathname === "/teas" || pathname === "/contact";
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const shouldRestoreFocus = useRef(false);
+
+  function closeDrawer(restoreFocus = true) {
+    shouldRestoreFocus.current = restoreFocus;
+    setIsOpen(false);
+  }
 
   useEffect(() => {
     const updateScrollState = () => setIsScrolled(window.scrollY > 12);
@@ -36,41 +47,84 @@ export function SiteNavbar() {
   }, []);
 
   useEffect(() => {
+    if (!isOpen) {
+      if (shouldRestoreFocus.current) menuButtonRef.current?.focus();
+      shouldRestoreFocus.current = false;
+      return;
+    }
+
+    const focusTimer = window.setTimeout(() => closeButtonRef.current?.focus(), 50);
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeDrawer();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(drawerRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? []);
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [isOpen]);
 
-  return <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [isOpen]);
+
+  return <header className={`site-header ${isScrolled ? "is-scrolled" : ""} ${hasLightHero ? "is-light-hero" : ""}`}>
+    <div className="utility-strip">
+      <div className="utility-strip-inner">
+        <p>{COMPANY_CONTACT.utilityLabel}</p>
+        <nav className="utility-contact-links" aria-label="Direct contact">
+          <a href={COMPANY_CONTACT.emailHref}><Mail size={13} aria-hidden="true" />Email Us</a>
+          <a href={COMPANY_CONTACT.phoneHref}><Phone size={13} aria-hidden="true" />Call Our Team</a>
+        </nav>
+      </div>
+    </div>
     <div className="nav-shell">
-      <Link className="brand" href="/" aria-label="AFT Techno Trade home">
-        <span className="brand-logo" aria-hidden="true"><Image src="/aft-tea-factory-logo.png" alt="" width={120} height={120} priority /></span>
-        <span>AFT Techno Trade</span>
+      <button ref={menuButtonRef} className="menu" type="button" aria-label={isOpen ? "Close navigation" : "Open navigation"} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => isOpen ? closeDrawer() : setIsOpen(true)}>
+        {isOpen ? <X size={22} /> : <Menu size={22} />}
+      </button>
+      <Link className="brand" href="/">
+        <span className="motion-sr-only">A.F.T TECHNO TRADE</span>
+        <AnimatedBrandLogo tone={isScrolled || hasLightHero ? "dark" : "light"} />
       </Link>
       <nav aria-label="Primary navigation">
         {links.map((link) => <Link className={pathname === link.href ? "active" : ""} href={link.href} key={link.label}>{link.label}</Link>)}
         <Link className={pathname === enquiryHref ? "active" : ""} href={enquiryHref}>Contact</Link>
       </nav>
-      <Link className="nav-cta" href={enquiryHref}>Get a Quote <ArrowUpRight size={16} /></Link>
-      <button className="menu" type="button" aria-label={isOpen ? "Close navigation" : "Open navigation"} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen((open) => !open)}>
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+      <Link className="nav-cta" href={enquiryHref}>Enquire <ArrowUpRight size={16} /></Link>
     </div>
-    {isOpen && <button className="mobile-menu-backdrop" type="button" aria-label="Close navigation" onClick={() => setIsOpen(false)}/>}
-    <div id="mobile-navigation" className={`drawer ${isOpen ? "is-open" : ""}`} aria-hidden={!isOpen}>
-      <p className="mobile-menu-title">Explore AFT</p>
+    {isOpen && <button className="mobile-menu-backdrop" type="button" aria-label="Close navigation" onClick={() => closeDrawer()}/>}
+    <div ref={drawerRef} id="mobile-navigation" className={`drawer ${isOpen ? "is-open" : ""}`} role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden={!isOpen}>
+      <div className="mobile-drawer-head">
+        <Link className="mobile-drawer-brand" href="/" aria-label="AFT Techno Trade home" onClick={() => closeDrawer(false)}>
+          <Image className="mobile-drawer-seal" src="/branding/aft-circular-seal.svg" alt="" width={72} height={72} />
+          <span className="mobile-menu-title">AFT Techno Trade</span>
+        </Link>
+        <button ref={closeButtonRef} className="mobile-drawer-close" type="button" aria-label="Close navigation" onClick={() => closeDrawer()}><X size={20}/></button>
+      </div>
       <nav aria-label="Mobile navigation">
-        {mobileLinks.map((link, index) => <Link className={pathname === link.href ? "active" : ""} href={link.href} onClick={() => setIsOpen(false)} key={link.label}><small>{String(index + 1).padStart(2, "0")}</small><span>{link.label}</span><ArrowUpRight size={18}/></Link>)}
+        {mobileLinks.map((link) => <Link className={pathname === link.href ? "active" : ""} href={link.href} onClick={() => closeDrawer(false)} key={link.label}><span>{link.label}</span><ChevronRight size={17}/></Link>)}
       </nav>
-      <div className="mobile-menu-secondary"><p>Discover AFT</p><Link href="/about" onClick={() => setIsOpen(false)}>Our Story</Link><Link href="/teas" onClick={() => setIsOpen(false)}>Tea Collection</Link></div>
-      <Link className="nav-cta" href={enquiryHref} onClick={() => setIsOpen(false)}>Get in Touch <ArrowUpRight size={16} /></Link>
+      <Link className="nav-cta" href={enquiryHref} onClick={() => closeDrawer(false)}>Enquire <ArrowUpRight size={16} /></Link>
     </div>
   </header>;
 }

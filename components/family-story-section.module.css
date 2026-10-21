@@ -1,0 +1,261 @@
+.section {
+  position: relative;
+  overflow: clip;
+  padding: clamp(88px, 9vw, 138px) 0;
+  background: #f8f6f1;
+  color: #13251c;
+}
+
+.shell {
+  display: grid;
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(560px, 1.22fr);
+  gap: clamp(54px, 7vw, 104px);
+  align-items: center;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  max-width: 470px;
+}
+
+.eyebrow {
+  margin: 0 0 22px;
+  color: #8d1f16;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.copy h2 {
+  max-width: 8.5ch;
+  margin: 0;
+  color: #12382b;
+  font-family: var(--font-sans), Arial, sans-serif;
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.copy > p:not(.eyebrow) {
+  max-width: 460px;
+  margin: 26px 0 0;
+  color: #4a544d;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.copy > p + p:not(.eyebrow) {
+  margin-top: 15px;
+}
+
+.copy a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 30px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+  color: #12382b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.copy a svg {
+  transition: transform 180ms ease;
+}
+
+.copy a:hover svg,
+.copy a:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+.media {
+  display: grid;
+  min-height: 650px;
+  grid-template-columns: minmax(220px, 0.84fr) minmax(330px, 1.16fr);
+  grid-template-rows: 1fr auto;
+  align-items: end;
+}
+
+.figure {
+  min-width: 0;
+  margin: 0;
+  will-change: clip-path, transform;
+}
+
+.figure > div {
+  position: relative;
+  overflow: hidden;
+  background: #e8e6df;
+}
+
+.figure img {
+  object-fit: cover;
+}
+
+.figure figcaption {
+  margin-top: 10px;
+  color: #5a625c;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.parents {
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: start;
+}
+
+.parentsImage {
+  aspect-ratio: 2 / 3;
+}
+
+.parentsImage img {
+  object-position: center center;
+}
+
+.parents figcaption {
+  text-align: right;
+}
+
+.son {
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 2;
+  margin-right: -42px;
+  padding: 14px 14px 0 0;
+  background: #f8f6f1;
+}
+
+.sonImage {
+  aspect-ratio: 16 / 9;
+}
+
+.sonImage img {
+  object-position: center center;
+}
+
+@media (max-width: 1050px) {
+  .shell {
+    grid-template-columns: minmax(280px, 0.72fr) minmax(470px, 1.28fr);
+    gap: 44px;
+  }
+
+  .media {
+    min-height: 570px;
+    grid-template-columns: minmax(190px, 0.82fr) minmax(280px, 1.18fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .section {
+    padding: 86px 0 92px;
+  }
+
+  .shell {
+    width: calc(100% - 40px);
+    grid-template-columns: 1fr;
+    gap: 54px;
+  }
+
+  .copy {
+    max-width: 620px;
+  }
+
+  .copy h2 {
+    max-width: 10ch;
+  }
+
+  .media {
+    width: min(100%, 680px);
+    min-height: 620px;
+    margin-left: auto;
+    grid-template-columns: minmax(220px, 0.82fr) minmax(330px, 1.18fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .section {
+    padding: 72px 0 78px;
+  }
+
+  .shell {
+    width: calc(100% - 36px);
+    gap: 40px;
+  }
+
+  .copy h2 {
+    max-width: 9ch;
+    font-size: 43px;
+    line-height: 1;
+  }
+
+  .copy > p:not(.eyebrow) {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .copy > p + p:not(.eyebrow) {
+    margin-top: 13px;
+  }
+
+  .copy a {
+    margin-top: 25px;
+  }
+
+  .media {
+    display: flex;
+    width: 100%;
+    min-height: 0;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .parents,
+  .son {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .parents {
+    order: 1;
+  }
+
+  .parents figcaption {
+    text-align: left;
+  }
+
+  .son {
+    order: 2;
+  }
+
+  .figure figcaption {
+    margin-top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy,
+  .figure {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .figure {
+    clip-path: none !important;
+    will-change: auto;
+  }
+
+  .copy a svg {
+    transition: none;
+  }
+}

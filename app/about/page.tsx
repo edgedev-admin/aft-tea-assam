@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight, Leaf, MapPin, ShieldCheck, Sprout, UsersRound } from "lucide-react";
-import { FAQSection } from "../../components/faq-section";
-import { Reveal, RevealHeading, RevealImage } from "../../components/reveal";
+import { AboutExperience } from "../../components/about-experience";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
-import "../about-redesign.css";
-import "../about-interaction-fix.css";
 
-export const metadata: Metadata = { title: "Our Story | AFT Techno Trade", description: "The Assam tea-growing roots and manufacturing journey of AFT Techno Trade." };
+export const metadata: Metadata = {
+  title: { absolute: "About AFT Techno Trade | Our Story in Upper Assam" },
+  description: "Discover the story of AFT Techno Trade, established in 2018 in Upper Assam, and learn about our tea craftsmanship, manufacturing, collections, and commitment to quality.",
+  alternates: { canonical: "/about" }
+};
 
-const values = [[MapPin, "Assam Roots", "A connection to the tea-growing landscape and communities that shape AFT’s background."], [Sprout, "Craftsmanship", "Care and attention in an origin-led approach to Assam tea and speciality production."], [ShieldCheck, "Quality Focus", "A thoughtful focus on tea selection, manufacturing and the finished cup."], [UsersRound, "Community Connection", "Recognition of the people and local knowledge connected to AFT’s roots."]] as const;
-const gallery = [["/images/tea/assam-dawn.png", "Tea-growing landscape in Assam"], ["/images/tea/about-2.jpg", "Tea leaves"], ["/images/tea/about-3.jpg", "Tea preparation detail"]] as const;
-
-export default function AboutPage(){return <><SiteNavbar/><main className="about-page"><section className="about-hero"><div className="about-shell about-hero-grid"><div className="about-hero-copy"><Reveal><p className="about-eyebrow"><Leaf size={13}/> Our story</p></Reveal><h1><RevealHeading text={"Rooted in Assam.\nCrafted with purpose."}/></h1><Reveal delay={.12}><p>AFT Techno Trade grew from the knowledge and relationships of small tea-growing communities around Dibrugarh, Assam.</p></Reveal><Reveal delay={.2}><div className="about-hero-actions"><Link href="#roots">Discover our story <ArrowUpRight size={15}/></Link><Link className="outline" href="/teas">Explore our teas <ArrowUpRight size={15}/></Link></div></Reveal></div><RevealImage className="about-hero-image"><Image src="/images/tea/about-1.jpg" alt="Tea leaves prepared for a close-up" fill priority sizes="(max-width: 800px) 100vw, 52vw"/></RevealImage></div></section><section id="roots" className="about-editorial"><div className="about-shell about-editorial-grid"><RevealImage className="about-editorial-image"><Image src="/images/tea/about-3.jpg" alt="Tea leaf detail" fill sizes="(max-width: 800px) 100vw, 48vw"/></RevealImage><div className="about-editorial-copy"><Reveal><p className="about-eyebrow"><Leaf size={13}/> Dikom · Lahowal · Dibrugarh</p></Reveal><h2><RevealHeading text={"A story shaped\nby the leaf."}/></h2><Reveal delay={.12}><p>AFT Techno Trade is rooted in the Dikom/Lahowal area of Dibrugarh. Its background in small tea-growing communities continues to shape its approach to Assam tea, manufacturing and speciality production.</p></Reveal></div></div></section><section className="about-roots"><div className="about-shell about-roots-grid"><div><Reveal><p className="about-eyebrow"><Leaf size={13}/> Our roots</p></Reveal><h2><RevealHeading text={"Rooted in Assam.\nBuilt around tea."}/></h2><Reveal delay={.12}><p>AFT brings local tea-growing knowledge and manufacturing expertise together in a focused approach to Assam tea. The company’s story remains connected to the people, place and leaf at its origin.</p></Reveal><Reveal delay={.18}><div className="about-milestones"><article><b>2019</b><span>Commercial production began</span></article><article><b>₹99,999</b><span>Golden Pearl auction result in 2022</span></article><article><b>Assam</b><span>Dibrugarh region</span></article></div></Reveal></div><RevealImage className="about-roots-image"><Image src="/images/tea/assam-dawn.png" alt="Assam tea-growing landscape" fill sizes="(max-width: 800px) 100vw, 48vw"/></RevealImage></div></section><section className="about-values"><div className="about-shell"><Reveal><p className="about-eyebrow"><Leaf size={13}/> What guides us</p></Reveal><h2><RevealHeading text={"Tea, people\nand place."}/></h2><div className="about-values-grid">{values.map(([Icon,title,text],index)=><Reveal as="article" delay={index*.08} key={title}><span><Icon size={22}/></span><h3>{title}</h3><p>{text}</p></Reveal>)}</div></div></section><section className="about-place"><div className="about-shell about-place-grid"><div><Reveal><p className="about-eyebrow"><Leaf size={13}/> From Assam, with purpose</p></Reveal><h2><RevealHeading text={"A region in\nevery leaf."}/></h2><Reveal delay={.12}><p>From tea gardens to carefully prepared leaves, Assam gives context to AFT’s continuing exploration of distinctive tea.</p></Reveal></div><div className="about-photo-grid">{gallery.map(([src,alt],index)=><RevealImage className={`about-photo photo-${index+1}`} delay={index*.08} key={src}><Image src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 30vw"/></RevealImage>)}</div></div></section><section className="about-cta"><div className="about-shell"><Reveal><p className="about-eyebrow"><Leaf size={13}/> AFT Techno Trade</p></Reveal><h2><RevealHeading text={"Discover the story\nbehind our tea."}/></h2><Reveal delay={.12}><p>Connect with AFT Techno Trade to learn more about Assam tea and speciality production.</p></Reveal><Reveal delay={.18}><div><Link href="/contact">Get a Quote <ArrowUpRight size={16}/></Link><Link className="outline" href="/teas">Explore Our Teas <ArrowUpRight size={16}/></Link></div></Reveal></div></section><FAQSection/></main><SiteFooter/></>}
+export default function AboutPage() {
+  return <>
+    <SiteNavbar />
+    <main id="main">
+      <AboutExperience />
+    </main>
+    <SiteFooter />
+  </>;
+}

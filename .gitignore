@@ -2,8 +2,12 @@ node_modules
 .next
 out
 .vercel
+.npm-cache
 *.tsbuildinfo
 .env*.local
+.env
+.env.*
+!.env.example
 .about-visual-qa*/
 .footer-qa-*/
 .hero-qa-profile/
@@ -12,3 +16,5 @@ out
 *-full.png
 *-qa.png
 AFT.mp4
+/artifacts/
+/public/aft-hero2.mp4

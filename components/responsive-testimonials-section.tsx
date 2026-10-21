@@ -8,9 +8,9 @@ import "../app/testimonials.css";
 import "../app/carousel-motion.css";
 import "../app/testimonial-mobile-fix.css";
 
-const milestones = [[UsersRound, "2019", "Commercial production begins"], [Layers3, "₹99,999", "Golden Pearl auction price / kg"], [Star, "DIBRUGARH", "Assam origin"], [UsersRound, "EKORATOLI CLONAL", "Registered tea mark"]] as const;
+const milestones = [[UsersRound, "2019", "Commercial production begins"], [Layers3, "₹99,999", "Golden Pearl auction price / kg"], [Star, "DIBRUGARH", "Assam origin"], [UsersRound, "EKORATOLI", "Commercial CTC range"]] as const;
 const testimonials = [
-  { name: "Jipal Kalita", initials: "JK", text: "Illustrative sample — not an actual customer review. Testimonial awaiting approval for AFT Tea Factory’s Assam tea presentation and craft.", status: "Testimonial awaiting approval" },
+  { name: "Jipal Kalita", initials: "JK", text: "Illustrative sample - not an actual customer review. Testimonial awaiting approval for AFT Techno Trade's Assam tea presentation and craft.", status: "Testimonial awaiting approval" },
   { name: "Ramesh Hazarika", initials: "RH", text: "Illustrative sample — not an actual customer review. Customer feedback to be added after confirmation.", status: "Testimonial awaiting approval" },
   { name: "Preetom Das", initials: "PD", text: "Illustrative sample — not an actual customer review. Placeholder for approved feedback about Assam tea quality and regional heritage.", status: "Testimonial awaiting approval" },
   { name: "Abhishek Bailung", initials: "AB", text: "Illustrative sample — not an actual customer review. Customer feedback to be added after confirmation.", status: "Testimonial awaiting approval" },

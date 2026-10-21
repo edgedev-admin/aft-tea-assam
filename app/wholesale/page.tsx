@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { EnquiryForm } from "../../components/enquiry-form";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
+import { CloudinaryImage } from "../../components/cloudinary-image";
 import { WholesaleEnquiryLink, WholesaleSupplyShowcase } from "../../components/wholesale-supply-showcase";
 import { COMPANY_CONTACT } from "../../lib/company";
 import styles from "./wholesale.module.css";
@@ -79,7 +79,7 @@ export default function WholesalePage() {
             </header>
             <div className={styles.originComposition}>
               <figure className={styles.originImage}>
-                <Image src="/images/tea/assam-dawn.png" alt="Tea-growing landscape in Upper Assam" fill sizes="(max-width: 800px) 100vw, 70vw" />
+                <CloudinaryImage src="/images/tea/assam-dawn.png" alt="Tea-growing landscape in Upper Assam" fill sizes="(max-width: 800px) 100vw, 70vw" />
                 <figcaption><MapPin size={15} /> Upper Assam tea-growing region</figcaption>
               </figure>
               <div className={styles.originCopy}>

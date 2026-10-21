@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CloudinaryImage } from "./cloudinary-image";
 import styles from "./final-contact-cta.module.css";
 
 export function FinalContactCta() {
@@ -24,7 +24,7 @@ export function FinalContactCta() {
         </div>
       </div>
       <figure className={styles.media}>
-        <Image
+        <CloudinaryImage
           src="/media/product-campaigns/Gold Tea 2.png"
           alt="Ajanta Gold Assam tea pack photographed among green tea leaves"
           fill

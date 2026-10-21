@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import {
@@ -15,11 +14,13 @@ import {
 } from "framer-motion";
 import type { CSSProperties, RefObject } from "react";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { cloudinaryImageSrcSet } from "../lib/cloudinary-media";
 import {
   campaignMosaicRows,
   campaignScenes,
   type ProductCampaignAsset
 } from "../lib/product-campaigns";
+import { CloudinaryImage } from "./cloudinary-image";
 
 const sceneStarts = [0.38, 0.51, 0.64, 0.77, 0.9];
 
@@ -28,6 +29,13 @@ type MotionRect = {
   top: MotionValue<number>;
   width: MotionValue<number>;
   height: MotionValue<number>;
+};
+
+type MotionTransform = {
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+  scaleX: MotionValue<number>;
+  scaleY: MotionValue<number>;
 };
 
 function useMotionRect(): MotionRect {
@@ -79,33 +87,71 @@ function useExpandedRect(
   return useMemo(() => ({ left, top, width, height }), [height, left, top, width]);
 }
 
+function useExpandedTransform(
+  expansion: MotionValue<number>,
+  source: MotionRect,
+  centre: MotionRect,
+  stageWidth: MotionValue<number>,
+  stageHeight: MotionValue<number>
+): MotionTransform {
+  const scaleX = useTransform(
+    [expansion, centre.width, stageWidth],
+    ([amount, centreSize, stageSize]) =>
+      1 + (Number(stageSize) / Math.max(1, Number(centreSize)) - 1) * Number(amount)
+  );
+  const scaleY = useTransform(
+    [expansion, centre.height, stageHeight],
+    ([amount, centreSize, stageSize]) =>
+      1 + (Number(stageSize) / Math.max(1, Number(centreSize)) - 1) * Number(amount)
+  );
+  const x = useTransform(
+    [expansion, source.left, centre.left, centre.width, stageWidth],
+    ([amount, start, centreStart, centreSize, stageSize]) => {
+      const target = (Number(start) - Number(centreStart)) * Number(stageSize) /
+        Math.max(1, Number(centreSize));
+      return Math.round((target - Number(start)) * Number(amount));
+    }
+  );
+  const y = useTransform(
+    [expansion, source.top, centre.top, centre.height, stageHeight],
+    ([amount, start, centreStart, centreSize, stageSize]) => {
+      const target = (Number(start) - Number(centreStart)) * Number(stageSize) /
+        Math.max(1, Number(centreSize));
+      return Math.round((target - Number(start)) * Number(amount));
+    }
+  );
+
+  return useMemo(() => ({ x, y, scaleX, scaleY }), [scaleX, scaleY, x, y]);
+}
+
 function CampaignPicture({
   asset,
   alt,
   priority = false,
   sizes = "100vw",
-  mobileArtDirection = false,
-  preserveOriginal = false
+  mobileArtDirection = false
 }: {
   asset: ProductCampaignAsset;
   alt: string;
   priority?: boolean;
   sizes?: string;
   mobileArtDirection?: boolean;
-  preserveOriginal?: boolean;
 }) {
   return (
     <picture>
       {mobileArtDirection && asset.mobileScene && (
-        <source media="(max-width: 700px)" srcSet={asset.mobileScene.src} type="image/webp" />
+        <source
+          media="(max-width: 700px)"
+          sizes="100vw"
+          srcSet={cloudinaryImageSrcSet(asset.mobileScene.src, [390, 540, 780])}
+        />
       )}
-      <Image
+      <CloudinaryImage
         src={asset.src}
         alt={alt}
         fill
         sizes={sizes}
         priority={priority}
-        unoptimized={preserveOriginal}
       />
     </picture>
   );
@@ -160,7 +206,6 @@ function CampaignScene({
           asset={asset}
           alt={asset.alt}
           mobileArtDirection
-          preserveOriginal
         />
         <div className="product-motion-scene__veil" />
       </div>
@@ -228,7 +273,7 @@ function MosaicRow({
     <motion.div className="product-motion-row" style={{ x, opacity }} aria-hidden="true">
       {row.map((asset, index) => (
         <figure className={index % 3 === 1 ? "is-wide" : ""} key={`${asset.id}-${index}`}>
-          <Image
+          <CloudinaryImage
             src={asset.src}
             alt=""
             fill
@@ -265,12 +310,16 @@ function FeatureMosaicSlots({
 
 function FeatureExpansionLayer({
   row,
-  rects,
+  sources,
+  centreRect,
+  transforms,
   opacity,
   geometryReady
 }: {
   row: ProductCampaignAsset[];
-  rects: MotionRect[];
+  sources: MotionRect[];
+  centreRect: MotionRect;
+  transforms: ReadonlyArray<MotionTransform | null>;
   opacity: MotionValue<number>;
   geometryReady: boolean;
 }) {
@@ -281,14 +330,19 @@ function FeatureExpansionLayer({
       data-render-strategy="unified-layout-resize"
       aria-hidden="true"
     >
-      {row.map((asset, index) => (
-        <motion.figure
+      {row.map((asset, index) => {
+        const transform = transforms[index];
+        return <motion.figure
           className={`product-motion-feature-tile${index === 2 ? " is-centre" : ""}`}
           style={{
-            left: rects[index].left,
-            top: rects[index].top,
-            width: rects[index].width,
-            height: rects[index].height,
+            left: transform ? sources[index].left : centreRect.left,
+            top: transform ? sources[index].top : centreRect.top,
+            width: transform ? sources[index].width : centreRect.width,
+            height: transform ? sources[index].height : centreRect.height,
+            x: transform?.x,
+            y: transform?.y,
+            scaleX: transform?.scaleX,
+            scaleY: transform?.scaleY,
             "--feature-position": `${asset.desktopFocalPoint.x} ${asset.desktopFocalPoint.y}`,
             "--feature-background": asset.mobileScene?.background ?? "#f8f6f1"
           } as unknown as MotionStyle & CSSProperties}
@@ -299,11 +353,10 @@ function FeatureExpansionLayer({
             asset={asset}
             alt=""
             mobileArtDirection={index === 2}
-            preserveOriginal
-            sizes="100vw"
+            sizes={index === 2 ? "100vw" : "(max-width: 700px) 94vw, 34vw"}
           />
         </motion.figure>
-      ))}
+      })}
     </motion.div>
   );
 }
@@ -344,6 +397,7 @@ export function ScrollProductExperience() {
   const stageWidth = useMotionValue(1);
   const stageHeight = useMotionValue(1);
   const [geometryReady, setGeometryReady] = useState(false);
+  const [useMobileTransforms, setUseMobileTransforms] = useState(false);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -351,20 +405,6 @@ export function ScrollProductExperience() {
   });
   const progress = scrollYProgress;
   const expansionProgress = useTransform(progress, [0.14, 0.36], [0, 1]);
-  const featureRectOne = useExpandedRect(
-    expansionProgress,
-    featureStartOne,
-    featureStartThree,
-    stageWidth,
-    stageHeight
-  );
-  const featureRectTwo = useExpandedRect(
-    expansionProgress,
-    featureStartTwo,
-    featureStartThree,
-    stageWidth,
-    stageHeight
-  );
   const featureRectThree = useExpandedRect(
     expansionProgress,
     featureStartThree,
@@ -372,33 +412,26 @@ export function ScrollProductExperience() {
     stageWidth,
     stageHeight
   );
-  const featureRectFour = useExpandedRect(
-    expansionProgress,
-    featureStartFour,
-    featureStartThree,
-    stageWidth,
-    stageHeight
-  );
-  const featureRectFive = useExpandedRect(
-    expansionProgress,
-    featureStartFive,
-    featureStartThree,
-    stageWidth,
-    stageHeight
-  );
-  const featureRects = useMemo(() => [
-    featureRectOne,
-    featureRectTwo,
-    featureRectThree,
-    featureRectFour,
-    featureRectFive
-  ], [
-    featureRectFive,
-    featureRectFour,
-    featureRectOne,
-    featureRectThree,
-    featureRectTwo
-  ]);
+  const featureTransformOne = useExpandedTransform(expansionProgress, featureStartOne, featureStartThree, stageWidth, stageHeight);
+  const featureTransformTwo = useExpandedTransform(expansionProgress, featureStartTwo, featureStartThree, stageWidth, stageHeight);
+  const featureTransformThree = useExpandedTransform(expansionProgress, featureStartThree, featureStartThree, stageWidth, stageHeight);
+  const featureTransformFour = useExpandedTransform(expansionProgress, featureStartFour, featureStartThree, stageWidth, stageHeight);
+  const featureTransformFive = useExpandedTransform(expansionProgress, featureStartFive, featureStartThree, stageWidth, stageHeight);
+  const featureTransforms = useMemo(() => [
+    featureTransformOne,
+    featureTransformTwo,
+    useMobileTransforms ? featureTransformThree : null,
+    featureTransformFour,
+    featureTransformFive
+  ], [featureTransformFive, featureTransformFour, featureTransformOne, featureTransformThree, featureTransformTwo, useMobileTransforms]);
+
+  useLayoutEffect(() => {
+    const query = window.matchMedia("(max-width: 700px)");
+    const update = () => setUseMobileTransforms(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   useLayoutEffect(() => {
     const sticky = stickyRef.current;
@@ -457,7 +490,9 @@ export function ScrollProductExperience() {
 
           <FeatureExpansionLayer
             row={featureRow}
-            rects={featureRects}
+            sources={featureStarts}
+            centreRect={featureRectThree}
+            transforms={featureTransforms}
             opacity={featureLayerOpacity}
             geometryReady={geometryReady}
           />
@@ -475,7 +510,7 @@ export function ScrollProductExperience() {
         <div className="product-motion-static__mosaic" aria-hidden="true">
           {productCampaignMobileMosaic.map((asset, index) => (
             <figure className={index === 0 ? "is-featured" : ""} key={asset.id}>
-              <Image src={asset.src} alt="" fill sizes="(max-width: 520px) 100vw, 50vw" style={{ objectFit: "cover" }} />
+              <CloudinaryImage src={asset.src} alt="" fill sizes="(max-width: 520px) 100vw, 50vw" style={{ objectFit: "cover" }} />
             </figure>
           ))}
         </div>

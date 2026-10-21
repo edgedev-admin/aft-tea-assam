@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import type { TeaProduct } from "../lib/products";
+import { CloudinaryImage } from "./cloudinary-image";
 
 export function CampaignSlider({ products }: { products: TeaProduct[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +21,7 @@ export function CampaignSlider({ products }: { products: TeaProduct[] }) {
     </div>
     <div className="campaign-feature" style={{ "--campaign-accent": active.accent } as React.CSSProperties}>
       <figure>
-        <Image src={active.image} alt={`${active.name} package`} width={980} height={980} />
+        <CloudinaryImage src={active.image} alt={`${active.name} package`} width={980} height={980} sizes="(max-width: 800px) 100vw, 50vw" />
       </figure>
       <article>
         <p>{active.category}</p>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, Boxes, Leaf, MapPin, PackageCheck, Scale, ScanLine } from "lucide-react";
 import { CraftProcessJourney } from "../../components/craft-process-journey";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
+import { CloudinaryImage } from "../../components/cloudinary-image";
 import { cuppingCriteria } from "../../lib/craft-process";
 import styles from "./craft.module.css";
 
@@ -33,7 +33,7 @@ export default function CraftPage() {
       <SiteNavbar />
       <main id="main" className={styles.page}>
         <section className={styles.hero} aria-labelledby="craft-hero-title">
-          <Image className={styles.heroImage} src="/images/tea/assam-dawn.png" alt="Tea-growing landscape at dawn in Assam" fill sizes="100vw" preload />
+          <CloudinaryImage className={styles.heroImage} src="/images/tea/assam-dawn.png" alt="Tea-growing landscape at dawn in Assam" fill sizes="100vw" preload />
           <div className={styles.heroShade} />
           <div className={styles.heroGrid} aria-hidden="true" />
           <div className={styles.heroInner}>

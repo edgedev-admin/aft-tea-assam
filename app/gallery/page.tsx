@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { AftPage, AftSection } from "../../components/aft-page";
+import { CloudinaryImage } from "../../components/cloudinary-image";
 
 export const metadata: Metadata = {
   title: "Tea Gallery",
@@ -19,6 +19,6 @@ const images = [
 
 export default function GalleryPage() {
   return <AftPage kicker="Gallery" title={"A closer look at\nour world of tea."} intro="Supplied product photography sits alongside illustrative tea imagery. Where an image is not documented as an AFT facility, garden or team photograph, the caption says so." image="/images/tea/assam-dawn.png">
-    <AftSection kicker="Tea in view" title="Product, leaf and place"><div className="aft-gallery">{images.map(([src, alt]) => <figure key={src}><Image src={src} alt={alt} fill sizes="(max-width: 760px) 50vw, 33vw"/><figcaption>{alt}</figcaption></figure>)}</div></AftSection>
+    <AftSection kicker="Tea in view" title="Product, leaf and place"><div className="aft-gallery">{images.map(([src, alt]) => <figure key={src}><CloudinaryImage src={src} alt={alt} fill sizes="(max-width: 760px) 50vw, 33vw"/><figcaption>{alt}</figcaption></figure>)}</div></AftSection>
   </AftPage>;
 }

@@ -5,6 +5,7 @@ const isVercelPreview = process.env.VERCEL_ENV === "preview";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
+    deviceSizes: [360, 430, 512, 640, 768, 1080, 1440, 1920],
     qualities: [75, 90],
     remotePatterns: [
       { protocol: "https", hostname: "framerusercontent.com" },

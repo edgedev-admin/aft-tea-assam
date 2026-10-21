@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { TeaProduct } from "../lib/products";
+import { CloudinaryImage } from "./cloudinary-image";
 
 export function ProductShowcase({ products }: { products: TeaProduct[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -38,7 +38,7 @@ export function ProductShowcase({ products }: { products: TeaProduct[] }) {
       <Link className="campaign-cta" href={`/teas/${active.slug}`}>View product <ArrowUpRight size={15} /></Link>
     </div>
     <div className="flagship-visual">
-      <Image src={active.image} alt={`${active.name} package`} width={960} height={960} priority />
+      <CloudinaryImage src={active.image} alt={`${active.name} package`} width={960} height={960} priority sizes="(max-width: 850px) 100vw, 50vw" />
     </div>
     <div className="showcase-arrows" aria-label="Product carousel controls">
       <button type="button" onClick={() => goTo(-1)} aria-label="Show previous product">Previous</button>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Leaf } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SiteNavbar } from "../../../components/site-navbar";
 import { SiteFooter } from "../../../components/site-footer";
+import { CloudinaryImage } from "../../../components/cloudinary-image";
 import { Reveal, RevealHeading, RevealImage } from "../../../components/reveal";
 import { getProduct, products, relatedProducts } from "../../../lib/products";
 
@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: Props) {
   return <><SiteNavbar/><main id="main" className="detail-page">
     <section className="detail-hero">
       <div className="detail-hero-inner">
-        <RevealImage className="detail-pack" style={{ "--detail-bg": product.background } as React.CSSProperties}><Image src={product.image} alt={`${product.name} visual`} width={900} height={900} priority/></RevealImage>
+        <RevealImage className="detail-pack" style={{ "--detail-bg": product.background } as React.CSSProperties}><CloudinaryImage src={product.image} alt={`${product.name} visual`} width={900} height={900} priority sizes="(max-width: 760px) 100vw, 50vw" /></RevealImage>
         <div>
           <div className="crumbs"><Link href="/teas">Our Teas</Link> / {product.name}</div>
           <Reveal><p className="detail-kicker"><Leaf size={14}/> {product.category}</p></Reveal>

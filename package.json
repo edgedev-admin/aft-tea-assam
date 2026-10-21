@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "media:upload": "node --experimental-strip-types scripts/upload-media-to-cloudinary.ts",
     "test:enquiries": "node --test --experimental-strip-types tests/enquiries.test.ts"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "cloudinary": "^2.11.0",
     "eslint": "latest",
     "eslint-config-next": "16.4.1",
     "tailwindcss": "latest",

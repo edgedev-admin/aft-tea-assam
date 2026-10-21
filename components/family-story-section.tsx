@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { CloudinaryImage } from "./cloudinary-image";
 import styles from "./family-story-section.module.css";
 
 export function FamilyStorySection() {
@@ -62,7 +62,7 @@ export function FamilyStorySection() {
             style={reduceMotion ? undefined : { clipPath: parentsClip, y: parentsY }}
           >
             <div className={styles.parentsImage}>
-              <Image
+              <CloudinaryImage
                 src="/images/company/parents-at-home (2).jpeg"
                 alt="Parents in the family behind AFT Techno Trade standing outside their home"
                 fill
@@ -78,7 +78,7 @@ export function FamilyStorySection() {
             style={reduceMotion ? undefined : { clipPath: sonClip, y: sonY }}
           >
             <div className={styles.sonImage}>
-              <Image
+              <CloudinaryImage
                 src="/images/company/son-office.png"
                 alt="A member of the family behind AFT Techno Trade seated in the company office"
                 fill

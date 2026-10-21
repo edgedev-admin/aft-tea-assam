@@ -29,6 +29,7 @@ export function SiteNavbar() {
   const hasLightHero = pathname === "/teas" || pathname === "/contact";
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const scrollSentinelRef = useRef<HTMLSpanElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -40,10 +41,14 @@ export function SiteNavbar() {
   }
 
   useEffect(() => {
-    const updateScrollState = () => setIsScrolled(window.scrollY > 12);
-    updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrollState);
+    const sentinel = scrollSentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -88,7 +93,7 @@ export function SiteNavbar() {
     return () => { document.body.style.overflow = previousOverflow; };
   }, [isOpen]);
 
-  return <header className={`site-header ${isScrolled ? "is-scrolled" : ""} ${hasLightHero ? "is-light-hero" : ""}`}>
+  return <><span ref={scrollSentinelRef} className="nav-scroll-sentinel" aria-hidden="true"/><header className={`site-header ${isScrolled ? "is-scrolled" : ""} ${hasLightHero ? "is-light-hero" : ""}`}>
     <div className="utility-strip">
       <div className="utility-strip-inner">
         <p>{COMPANY_CONTACT.utilityLabel}</p>
@@ -126,5 +131,5 @@ export function SiteNavbar() {
       </nav>
       <Link className="nav-cta" href={enquiryHref} onClick={() => closeDrawer(false)}>Enquire <ArrowUpRight size={16} /></Link>
     </div>
-  </header>;
+  </header></>;
 }

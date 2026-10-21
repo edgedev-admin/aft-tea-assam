@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Leaf, MapPin, Sprout } from "lucide-react";
 import { useRef } from "react";
+import { CloudinaryImage } from "./cloudinary-image";
 import styles from "./about-experience.module.css";
 
 const founders = ["Noor Alam Khan", "Imran Khan", "Aslam Khan"] as const;
@@ -38,7 +38,7 @@ export function AboutExperience() {
 
   return <div className={styles.page}>
     <section className={styles.hero} aria-labelledby="about-hero-title">
-      <Image className={styles.heroImage} src="/images/tea/assam-dawn.png" alt="Tea-growing landscape at sunrise in Assam" fill priority quality={90} sizes="100vw" />
+      <CloudinaryImage className={styles.heroImage} src="/images/tea/assam-dawn.png" alt="Tea-growing landscape at sunrise in Assam" fill priority quality={90} sizes="100vw" />
       <div className={styles.heroShade} />
       <div className={styles.heroInner}>
         <p className={styles.heroEyebrow}>Our story <span aria-hidden="true">·</span> AFT Techno Trade</p>
@@ -58,7 +58,7 @@ export function AboutExperience() {
         </header>
         <div className={styles.peopleComposition}>
           <motion.figure className={styles.familyPortrait} style={reduceMotion ? undefined : { clipPath: familyClip, y: familyY }}>
-            <Image src="/images/company/parents-at-home (2).jpeg" alt="Two members of the family behind AFT Techno Trade standing outside their home" fill quality={90} sizes="(max-width: 820px) 100vw, 48vw" />
+            <CloudinaryImage src="/images/company/parents-at-home (2).jpeg" alt="Two members of the family behind AFT Techno Trade standing outside their home" fill quality={90} sizes="(max-width: 820px) 100vw, 48vw" />
             <figcaption>Family, at home in Upper Assam.</figcaption>
           </motion.figure>
           <div className={styles.peopleNarrative}>
@@ -68,7 +68,7 @@ export function AboutExperience() {
               <small>Named in the company-provided account. Individual legal titles are not assigned here.</small>
             </div>
             <motion.figure className={styles.officePortrait} style={reduceMotion ? undefined : { clipPath: officeClip, y: officeY }}>
-              <Image src="/images/company/son-office.png" alt="A member of the family behind AFT Techno Trade seated in the company office" fill quality={90} sizes="(max-width: 820px) 100vw, 45vw" />
+              <CloudinaryImage src="/images/company/son-office.png" alt="A member of the family behind AFT Techno Trade seated in the company office" fill quality={90} sizes="(max-width: 820px) 100vw, 45vw" />
               <figcaption>At work in the AFT Techno Trade office.</figcaption>
             </motion.figure>
           </div>
@@ -77,7 +77,7 @@ export function AboutExperience() {
     </section>
 
     <section ref={landRef} className={styles.land} aria-labelledby="land-title">
-      <motion.div className={styles.landMedia} style={reduceMotion ? undefined : { y: landY, scale: landScale }}><Image src="/images/tea/assam-dawn.png" alt="Tea fields in the Assam landscape" fill quality={90} sizes="100vw" /></motion.div>
+      <motion.div className={styles.landMedia} style={reduceMotion ? undefined : { y: landY, scale: landScale }}><CloudinaryImage src="/images/tea/assam-dawn.png" alt="Tea fields in the Assam landscape" fill quality={90} sizes="100vw" /></motion.div>
       <div className={styles.landShade} />
       <div className={styles.landInner}>
         <p className={styles.eyebrowLight}>Our home <span aria-hidden="true">·</span> Upper Assam</p>
@@ -99,11 +99,11 @@ export function AboutExperience() {
     <section className={styles.craft} aria-labelledby="craft-title"><div className={styles.shell}>
       <header className={styles.sectionIntroCompact}><p className={styles.eyebrow}>The craft</p><h2 id="craft-title">Different expressions. One commitment to tea.</h2></header>
       <article className={styles.craftStory}>
-        <figure><Image src="/images/tea/about-3.jpg" alt="Loose tea leaves infusing in a glass pot" fill sizes="(max-width: 560px) calc(100vw - 36px), 400px" /></figure>
+        <figure><CloudinaryImage src="/images/tea/about-3.jpg" alt="Loose tea leaves infusing in a glass pot" fill sizes="(max-width: 560px) calc(100vw - 36px), 400px" /></figure>
         <div><span>01 <Sprout aria-hidden="true" size={17} /></span><p className={styles.eyebrow}>Nahorchukbari</p><h3>The patience of specialty craft.</h3><p>Select leaf and bud material, carefully managed withering and skilled hand-rolling shape the company&apos;s whole-leaf and Golden Pearl story. The work favours attention, sensory judgement and limited specialty lots.</p><Link href="/teas/golden-pearl">Explore the specialty story <ArrowUpRight aria-hidden="true" size={15} /></Link></div>
       </article>
       <article className={`${styles.craftStory} ${styles.craftReverse}`}>
-        <figure><Image src="/images/tea/about-4.jpg" alt="Prepared chai being poured into cups" fill sizes="(max-width: 560px) calc(100vw - 36px), 400px" /></figure>
+        <figure><CloudinaryImage src="/images/tea/about-4.jpg" alt="Prepared chai being poured into cups" fill sizes="(max-width: 560px) calc(100vw - 36px), 400px" /></figure>
         <div><span>02 <Leaf aria-hidden="true" size={17} /></span><p className={styles.eyebrow}>Ekoratoli</p><h3>The discipline behind the everyday cup.</h3><p>CTC processing, grading and cup evaluation support robust Assam tea for milk-tea applications and commercial buyers. Consistency, extraction and a dependable cup guide the everyday side of the business.</p><Link href="/craft">See how we approach tea <ArrowUpRight aria-hidden="true" size={15} /></Link></div>
       </article>
     </div></section>
@@ -118,7 +118,7 @@ export function AboutExperience() {
       <div className={styles.identityGrid}>
         <article className={styles.nahorchukbari}><span>Specialty tea identity</span><h3>Nahorchukbari</h3><p>Handcrafted teas, distinctive leaf selections and the Golden Pearl story.</p><Link href="/teas/golden-pearl">Explore <ArrowUpRight aria-hidden="true" size={14} /></Link></article>
         <article className={styles.ekoratoli}><span>Commercial CTC identity</span><h3>Ekoratoli</h3><p>Robust Assam grades developed for everyday milk-tea and commercial applications.</p><Link href="/wholesale">Wholesale enquiries <ArrowUpRight aria-hidden="true" size={14} /></Link></article>
-        <article className={styles.ajanta}><Image src="/media/product-campaigns/AFT TEA COLLECTION.png" alt="Ajanta Tea Gold, Elaichi, High Societea and Kolkata Street Masala Chai packs" fill quality={90} sizes="(max-width: 900px) 100vw, 50vw" /><div><span>Consumer tea collection</span><h3>Ajanta Tea</h3><p>Gold, Elaichi, High Societea and Kolkata Street Masala Chai.</p><Link href="/teas">View the collection <ArrowUpRight aria-hidden="true" size={14} /></Link></div></article>
+        <article className={styles.ajanta}><CloudinaryImage src="/media/product-campaigns/AFT TEA COLLECTION.png" alt="Ajanta Tea Gold, Elaichi, High Societea and Kolkata Street Masala Chai packs" fill quality={90} sizes="(max-width: 900px) 100vw, 50vw" /><div><span>Consumer tea collection</span><h3>Ajanta Tea</h3><p>Gold, Elaichi, High Societea and Kolkata Street Masala Chai.</p><Link href="/teas">View the collection <ArrowUpRight aria-hidden="true" size={14} /></Link></div></article>
       </div>
     </div></section>
 

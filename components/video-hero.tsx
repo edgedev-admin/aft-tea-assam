@@ -1,27 +1,24 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { cloudinaryImageUrl, cloudinaryVideoUrl } from "../lib/cloudinary-media";
+import { CloudinaryHeroVideo } from "./cloudinary-hero-video";
+import { CloudinaryImage } from "./cloudinary-image";
 import styles from "./video-hero.module.css";
 
 export function VideoHero() {
+  const poster = cloudinaryImageUrl("/images/tea/assam-dawn.png", { width: 1920 });
+  const mobileVideo = cloudinaryVideoUrl("/aft-hero.mp4", 960);
+  const desktopVideo = cloudinaryVideoUrl("/aft-hero.mp4", 1920);
+
   return <section className="video-hero" aria-labelledby="home-hero-title">
     <div className="video-hero-media" aria-hidden="true">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/tea/assam-dawn.png"
-      >
-        <source
-          src="/aft-hero.mp4"
-          type="video/mp4"
-          media="(prefers-reduced-motion: no-preference)"
-        />
-      </video>
+      <CloudinaryHeroVideo
+        desktopSrc={desktopVideo}
+        mobileSrc={mobileVideo}
+        poster={poster}
+      />
       <div className="video-hero-fallback">
-        <Image src="/images/tea/assam-dawn.png" alt="" fill priority sizes="100vw" />
+        <CloudinaryImage src="/images/tea/assam-dawn.png" alt="" fill priority sizes="100vw" />
       </div>
     </div>
     <div className="video-hero-shade" aria-hidden="true" />

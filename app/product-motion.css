@@ -36,7 +36,7 @@
 .product-motion-static__scenes figure picture{position:absolute;inset:0;display:block}
 .product-motion-static__scenes figure img{object-fit:cover}
 .product-motion-static__scenes article>div{display:grid;grid-template-columns:32px minmax(0,1fr) 44px;align-items:center;gap:10px;padding-top:16px}
-.product-motion-static__scenes span{color:#f5b535;font-size:11px;font-weight:900;letter-spacing:.12em}
+.product-motion-static__scenes span{color:#9c211a;font-size:11px;font-weight:900;letter-spacing:.12em}
 .product-motion-static__scenes h3{margin:0;font:800 clamp(22px,4vw,32px)/1.04 var(--font-sans),Arial,sans-serif;letter-spacing:0}
 .product-motion-static__scenes a{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(8,34,25,.45);color:#082219;transition:none!important}
 .product-motion-static__scenes a:focus-visible{outline:2px solid #f5b535;outline-offset:3px}
@@ -66,7 +66,6 @@ html.motion-debug-enabled .product-motion-debug{display:grid;gap:8px}
   .product-motion-row--feature{margin-left:0}
   .product-motion-feature-slot.is-centre{aspect-ratio:13/18}
   .product-motion-feature-tile.is-centre{background:var(--feature-background)}
-  .product-motion-feature-tile.is-centre{transform-origin:0 0;will-change:transform}
   .product-motion-feature-tile.is-centre img{object-position:center}
   .product-motion-scene{background:var(--scene-mobile-background,#082219)}
   .product-motion-scene__media{inset:0;background:var(--scene-mobile-background)}

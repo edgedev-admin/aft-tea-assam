@@ -1,0 +1,125 @@
+.ctcExplorer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(330px, .82fr);
+  align-items: center;
+  gap: clamp(42px, 7vw, 92px);
+  margin-top: 48px;
+}
+
+.teaTextures {
+  position: relative;
+  min-height: 610px;
+}
+
+.teaTextures figure {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+  background: #d7d0bd;
+}
+
+.teaTextures img { object-fit: cover; }
+.textureMain { inset: 0 12% 13% 0; }
+.textureInset { top: 8%; right: 0; width: 35%; aspect-ratio: 4 / 5; border: 8px solid #fffaf0; }
+.textureBottom { right: 5%; bottom: 0; width: 45%; aspect-ratio: 3 / 2; border: 8px solid #fffaf0; }
+.teaTextures figcaption { position: absolute; left: 0; bottom: 0; padding: 9px 12px; background: #12382b; color: #fff8ea; font: 700 9px/1.2 var(--font-sans), Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.textureInset figcaption { display: none; }
+
+.gradePanel { padding: 14px 0; }
+.eyebrow { margin: 0; color: #8d1f16; font: 800 10px/1.3 var(--font-sans), Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.gradeSelector { margin-top: 18px; border-top: 1px solid rgba(42,23,15,.2); }
+.gradeSelector button { display: grid; width: 100%; min-height: 60px; grid-template-columns: 28px minmax(0,1fr) 20px; align-items: center; gap: 10px; border: 0; border-bottom: 1px solid rgba(42,23,15,.2); padding: 0 2px; background: transparent; color: #675b4a; text-align: left; cursor: pointer; transition: color .2s ease, padding .2s ease; }
+.gradeSelector button > span { color: #8d1f16; font: 800 9px/1 var(--font-sans), Arial, sans-serif; }
+.gradeSelector button > svg { justify-self: end; }
+.gradeSelector button[aria-pressed="true"] { padding-left: 10px; color: #12382b; }
+.gradeSelector button[aria-pressed="true"] > svg { color: #8d1f16; }
+.gradeSelector button:focus-visible,.productRail button:focus-visible { outline: 2px solid #8d1f16; outline-offset: -2px; }
+.gradeDescription { padding: 28px 0 0; animation: content-in .28s ease both; }
+.gradeKicker { color: #9b7450; font: 800 9px/1.2 var(--font-sans), Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.gradeDescription h3 { margin: 9px 0 0; color: #172820; font: 400 clamp(34px,3.2vw,46px)/.98 var(--font-display), Georgia,serif; }
+.gradeDescription p { max-width: 490px; margin: 14px 0 0; color: #625e55; font: 400 13px/1.68 var(--font-sans), Arial,sans-serif; }
+.gradeDescription small { display: block; margin-top: 12px; color: #786d5e; font: 700 10px/1.45 var(--font-sans), Arial,sans-serif; }
+.gradeDescription a { display: inline-flex; align-items: center; gap: 9px; margin-top: 19px; color: #8d1f16; font: 800 11px/1.3 var(--font-sans), Arial,sans-serif; }
+.gradeCaveat { margin: 28px 0 0; color: #817666; font: 500 9px/1.5 var(--font-sans), Arial,sans-serif; }
+
+.ajantaExplorer { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(280px,.75fr); column-gap: clamp(46px,8vw,112px); align-items: center; margin-top: 20px; }
+.ajantaStage { position: relative; display: grid; min-height: 640px; grid-template: 1fr / 1fr; place-items: center; overflow: hidden; background: #f3d16a; transition: background-color .35s ease; touch-action: pan-y; }
+.ajantaStage[data-product="high-societea"] { background: #25231f; }
+.ajantaStage[data-product="ajanta-elaichi"] { background: #dced96; }
+.ajantaStage[data-product="kolkata-street-masala-chai"] { background: #f7dc35; }
+.ajantaStage:before { position: absolute; inset: 0; background: linear-gradient(120deg,rgba(255,255,255,.27),transparent 42%,rgba(42,23,15,.08)); content: ""; pointer-events: none; }
+.stageNumber,.stageFootnote { position: absolute; z-index: 1; left: 22px; color: rgba(23,40,32,.72); font: 800 9px/1.2 var(--font-sans), Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.stageNumber { top: 22px; }
+.stageNumber span { padding: 0 4px; color: #8d1f16; }
+.stageFootnote { bottom: 19px; margin: 0; color: rgba(23,40,32,.68); }
+.autoplayToggle { position: absolute; z-index: 6; top: 15px; right: 18px; display: inline-flex; min-width: 74px; min-height: 34px; align-items: center; justify-content: center; gap: 7px; border: 1px solid rgba(23,40,32,.32); padding: 0 10px; background: rgba(255,248,234,.84); color: #172820; font: 700 9px/1 var(--font-sans),Arial,sans-serif; cursor: pointer; }
+.autoplayToggle:focus-visible { outline: 2px solid #8d1f16; outline-offset: 3px; }
+.ajantaStage[data-product="high-societea"] .stageNumber,.ajantaStage[data-product="high-societea"] .stageFootnote { color: rgba(255,248,234,.72); }
+.packFigure,.preloadFigure { position: relative; grid-area: 1 / 1; width: min(74%,430px); height: min(74vh,570px); min-height: 420px; margin: 20px 0; }
+.preloadFigure { z-index: -1; visibility: hidden; pointer-events: none; }
+.packImage { object-fit: contain; }
+.productDetailsStage { position: relative; display: grid; min-height: 400px; grid-template: 1fr / 1fr; align-self: stretch; }
+.productDetails { display: flex; grid-area: 1 / 1; flex-direction: column; justify-content: center; padding: 34px 0 22px; }
+.productDetails h3 { margin: 11px 0 0; color: #172820; font: 400 clamp(46px,5.2vw,72px)/.93 var(--font-display), Georgia,serif; text-wrap: balance; animation: content-in .25s ease both; }
+.productDetails > p:not(.eyebrow,.productNote) { max-width: 480px; margin: 20px 0 0; color: #5d625a; font: 400 14px/1.72 var(--font-sans), Arial,sans-serif; animation: content-in .3s ease both; }
+.productNote { max-width: 480px; margin: 13px 0 0; color: #786d5e; font: 600 11px/1.6 var(--font-sans), Arial,sans-serif; }
+.productDetails > small { display: block; margin-top: 16px; color: #786d5e; font: 700 10px/1.5 var(--font-sans), Arial,sans-serif; }
+.productDetails > a { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; color: #8d1f16; font: 800 11px/1.3 var(--font-sans), Arial,sans-serif; }
+.productRail { display: grid; grid-column: 1/-1; grid-template-columns: repeat(4,minmax(0,1fr)); margin-top: 24px; border-top: 1px solid rgba(42,23,15,.2); border-bottom: 1px solid rgba(42,23,15,.2); }
+.productRail button { position: relative; display: flex; min-height: 84px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; border: 0; border-right: 1px solid rgba(42,23,15,.16); padding: 12px 18px; background: transparent; color: #746956; text-align: left; cursor: pointer; transition: color .2s ease,background-color .2s ease; }
+.productRail button:last-child { border-right: 0; }
+.productRail button > span { color: #8d1f16; font: 800 9px/1 var(--font-sans), Arial,sans-serif; }
+.productRail button strong { color: #172820; font: 600 15px/1.25 var(--font-sans), Arial,sans-serif; }
+.productRail button small { font: 600 9px/1.3 var(--font-sans), Arial,sans-serif; }
+.productRail button[aria-pressed="true"] { background: #f1e6cf; }
+.productRail button[aria-pressed="true"]:after { position: absolute; right: 18px; bottom: -1px; left: 18px; height: 3px; background: #8d1f16; content: ""; }
+
+@keyframes content-in { from { opacity: .5; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pack-in { from { opacity: .72; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1050px) {
+  .ctcExplorer { grid-template-columns: minmax(0,1fr) minmax(300px,.88fr); gap: 42px; }
+  .teaTextures { min-height: 530px; }
+  .ajantaStage { min-height: 570px; }
+.packFigure,.preloadFigure { min-height: 390px; height: min(68vh,500px); }
+}
+
+@media (max-width: 760px) {
+  .ctcExplorer { grid-template-columns: 1fr; gap: 32px; margin-top: 30px; }
+  .teaTextures { min-height: 420px; }
+  .textureInset { border-width: 6px; }
+  .textureBottom { border-width: 6px; }
+  .gradePanel { padding: 0; }
+  .gradeSelector { display: grid; grid-template-columns: 1fr 1fr; }
+  .gradeSelector button { min-height: 62px; grid-template-columns: 23px minmax(0,1fr) 18px; gap: 6px; padding: 0 8px; border-right: 1px solid rgba(42,23,15,.16); font-size: 12px; }
+  .gradeSelector button:nth-child(even) { border-right: 0; }
+  .gradeSelector button[aria-pressed="true"] { padding-left: 12px; }
+  .gradeDescription { padding-top: 22px; }
+  .gradeCaveat { margin-top: 20px; }
+  .ajantaExplorer { grid-template-columns: 1fr; margin-top: 30px; }
+  .ajantaStage { min-height: 490px; grid-row: 1; }
+  .packFigure,.preloadFigure { width: min(68%,340px); height: 425px; min-height: 0; margin: 20px 0; }
+  .productDetails { padding: 28px 2px 20px; }
+  .productDetailsStage { min-height: 0; grid-row: 2; }
+  .productDetails h3 { font-size: 47px; }
+  .productRail { grid-row: 3; grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 0; }
+  .productRail button { min-height: 76px; padding: 10px 12px; border-bottom: 1px solid rgba(42,23,15,.16); }
+  .productRail button:nth-child(even) { border-right: 0; }
+  .productRail button:nth-last-child(-n+2) { border-bottom: 0; }
+  .productRail button strong { font-size: 13px; }
+  .productRail button[aria-pressed="true"]:after { right: 12px; left: 12px; }
+}
+
+@media (max-width: 420px) {
+  .teaTextures { min-height: 360px; }
+  .gradeSelector button { font-size: 11px; }
+  .ajantaStage { min-height: 430px; }
+  .packFigure,.preloadFigure { width: min(72%,300px); height: 370px; }
+  .autoplayToggle { top: 12px; right: 12px; min-width: 64px; min-height: 32px; }
+  .stageNumber { top: 17px; left: 16px; }
+  .stageFootnote { left: 16px; bottom: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradeSelector button,.ajantaStage,.gradeDescription,.packFigure,.productDetails h3,.productDetails > p { animation: none; transition: none; }
+}

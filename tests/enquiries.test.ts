@@ -108,6 +108,15 @@ test("reports configuration readiness without exposing configuration", async () 
   assert.deepEqual(await GET().then((response) => response.json()), { configured: true });
 });
 
+test("validates the browser origin against the incoming host when Next rewrites its internal URL", async () => {
+  const headers = { Host: "127.0.0.1:3100", Origin: "http://127.0.0.1:3100", "x-forwarded-proto": "http", "Content-Type": "application/json", "Idempotency-Key": "origin_regression_123456789" };
+  const response = await POST(new Request("http://localhost:3100/api/enquiries", { method: "POST", headers, body: "{}" }));
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).code, "validation_failed");
+  const rejected = await POST(new Request("http://localhost:3100/api/enquiries", { method: "POST", headers: { ...headers, Origin: "https://untrusted.invalid" }, body: "{}" }));
+  assert.equal(rejected.status, 403);
+});
+
 test("accepts a provider-confirmed enquiry once and deduplicates a retry", async () => {
   configureEmail();
   let sends = 0;

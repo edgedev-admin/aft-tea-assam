@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "../../lib/seo";
 import { ArrowDown, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { ContactFaq } from "../../components/contact-faq";
 import { EnquiryForm } from "../../components/enquiry-form";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
-import { COMPANY_CONTACT } from "../../lib/company";
+import { businessContacts, COMPANY_CONTACT, phoneHref } from "../../lib/company";
+import { WhatsAppAction, WhatsAppContactLink } from "../../components/whatsapp-action";
+import { getProduct } from "../../lib/products";
 import styles from "./contact.module.css";
 import "./contact-contrast.css";
 
-export const metadata: Metadata = {
-  title: { absolute: "Contact AFT Techno Trade | Tea Enquiries & Wholesale Supply" },
+export const metadata: Metadata = pageMetadata({
+  title: "Contact AFT Techno Trade | Tea Enquiries & Wholesale Supply",
   description: "Contact AFT Techno Trade in Upper Assam for tea collection enquiries, commercial Assam CTC supply, specialty tea, custom blending and wholesale discussions.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  const requestedProduct = (await searchParams).product;
+  const product = typeof requestedProduct === "string" ? getProduct(requestedProduct) : undefined;
   return <>
     <SiteNavbar />
     <main id="main" className={`${styles.page} aft-contact-2-page`}>
@@ -34,7 +39,7 @@ export default function ContactPage() {
             <h2>Tell us what you&apos;re looking for.</h2>
             <p>Share a few details about your enquiry, and the AFT Techno Trade team can follow up with you.</p>
           </div>
-          <EnquiryForm variant="contact" />
+          <EnquiryForm variant="contact" defaultType={product ? "Tea Collection / Product Enquiry" : ""} productContext={product?.name} />
         </div>
       </section>
 
@@ -43,17 +48,18 @@ export default function ContactPage() {
           <div className={styles.contactIntro}>
             <h2 id="direct-contact-title">A straightforward way to get in touch.</h2>
             <p>Share your enquiry, tell us about the tea you&apos;re interested in, and include any relevant business requirements. This helps our team understand the conversation before following up.</p>
+            <WhatsAppAction className={styles.whatsappAction} productName={product?.name} />
           </div>
           <address className={styles.contactDetails}>
-            <a href={COMPANY_CONTACT.phoneHref}><Phone size={18} aria-hidden="true" /><span><small>Phone</small>{COMPANY_CONTACT.phone}</span><ArrowUpRight size={16} aria-hidden="true" /></a>
-            <a href={COMPANY_CONTACT.emailHref}><Mail size={18} aria-hidden="true" /><span><small>Email</small>{COMPANY_CONTACT.email}</span><ArrowUpRight size={16} aria-hidden="true" /></a>
+            {businessContacts.map((contact) => <div className={styles.phoneRow} key={contact.id}><a className={styles.phoneNumber} href={phoneHref(contact)}><Phone size={18} aria-hidden="true" /><span><small>{contact.label}</small>{contact.display}</span></a><WhatsAppContactLink contact={contact} productName={product?.name} /></div>)}
+            <a className={styles.contactEmail} href={COMPANY_CONTACT.emailHref}><Mail size={18} aria-hidden="true" /><span><small>Email</small>{COMPANY_CONTACT.email}</span><ArrowUpRight size={16} aria-hidden="true" /></a>
             <div><MapPin size={18} aria-hidden="true" /><span><small>Location</small>Dikom &amp; Lahowal, near Dibrugarh Airport<br />Dibrugarh, Assam, India, 786010</span></div>
           </address>
           <div className={styles.socials} aria-label="AFT Tea India social channels">
             <span>Follow AFT Tea India</span>
-            <a href="https://www.instagram.com/aftteaindia/" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Instagram"><FaInstagram aria-hidden="true" /></a>
-            <a href="https://www.facebook.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Facebook"><FaFacebookF aria-hidden="true" /></a>
-            <a href="https://x.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on X"><FaXTwitter aria-hidden="true" /></a>
+            <a href="https://www.instagram.com/aftteaindia/" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on Instagram"><FaInstagram aria-hidden="true" /></a>
+            <a href="https://www.facebook.com/AFTTeaIndia" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on Facebook"><FaFacebookF aria-hidden="true" /></a>
+            <a href="https://x.com/AFTTeaIndia" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on X"><FaXTwitter aria-hidden="true" /></a>
           </div>
         </div>
       </section>
@@ -68,6 +74,6 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-    <SiteFooter />
+    <SiteFooter productName={product?.name} />
   </>;
 }

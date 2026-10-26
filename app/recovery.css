@@ -175,7 +175,8 @@ body:before{opacity:.025}
 /* Reference-driven homepage reconstruction */
 body:before{opacity:0!important}
 .brand-home{background:#fff;color:#101010}
-.site-header{left:0!important;right:0!important;top:0!important;width:100%!important;max-width:none!important;transform:none!important;color:#fff}
+.site-header{--navbar-fg:#fff;--navbar-link:rgba(255,255,255,.9);--navbar-accent:#f5b535;--navbar-surface:transparent;left:0!important;right:0!important;top:0!important;width:100%!important;max-width:none!important;transform:none!important;background:var(--navbar-surface)!important;color:var(--navbar-fg)}
+.site-header.nav-theme-solid-light,.site-header.is-scrolled{--navbar-fg:#153b2b;--navbar-link:#153b2b;--navbar-accent:#8d1f16;--navbar-surface:#fff5e4;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 .utility-strip{display:block;background:var(--aft-red);color:#fff8ea;font-family:var(--font-sans),Arial,sans-serif;pointer-events:auto}
 .utility-strip>.utility-strip-inner{width:min(1240px,calc(100% - 48px));height:34px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:28px}
 .utility-strip p{margin:0;color:inherit;font-size:11px;font-weight:700;line-height:1;letter-spacing:.08em;white-space:nowrap}
@@ -184,23 +185,14 @@ body:before{opacity:0!important}
 .site-header .utility-contact-links a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
 .site-header .utility-contact-links a:focus-visible{outline:2px solid #fff8ea;outline-offset:3px;border-radius:2px}
 .site-header .nav-shell{width:min(1240px,calc(100% - 48px))!important;height:78px!important;min-height:78px!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
-.site-header.is-scrolled{background:#fff8ea!important;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 .site-header.is-scrolled .utility-strip{display:none}
 .site-header.is-scrolled .nav-shell{height:74px!important;min-height:74px!important}
-.site-header .brand{color:#fff!important;font-family:var(--font-sans),Arial,sans-serif!important;font-size:20px!important;font-weight:900!important;letter-spacing:0!important}
+.site-header .brand{color:var(--navbar-fg)!important;font-family:var(--font-sans),Arial,sans-serif!important;font-size:20px!important;font-weight:900!important;letter-spacing:0!important}
 .site-header .brand>span:not(.brand-logo){color:inherit!important;font-family:var(--font-sans),Arial,sans-serif!important;font-size:20px!important;font-weight:900!important;letter-spacing:0!important;line-height:1!important}
-.site-header.is-scrolled .brand{color:#12382b!important}
 .site-header .brand-logo{width:46px;height:46px;flex-basis:46px;background:rgba(255,255,255,.96)}
-.site-header nav a{color:rgba(255,255,255,.9)!important;font-size:13px!important;font-weight:900!important;letter-spacing:.02em}
-.site-header nav a.active,.site-header nav a:hover{color:#f5b535!important}
-.site-header.is-scrolled nav a{color:#12382b!important}
-.site-header.is-scrolled nav a.active,.site-header.is-scrolled nav a:hover{color:#8d1f16!important}
-.site-header nav a.active:after{background:#f5b535!important;bottom:-12px!important}
-.site-header.is-scrolled nav a.active:after{background:#8d1f16!important}
-.site-header.is-light-hero nav a{color:#12382b!important}
-.site-header.is-light-hero nav a.active,.site-header.is-light-hero nav a:hover{color:#8d1f16!important}
-.site-header.is-light-hero nav a.active:after{background:#8d1f16!important}
-.site-header.is-light-hero .utility-contact-links a{color:#fff8ea!important}
+.site-header nav a{color:var(--navbar-link)!important;font-size:13px!important;font-weight:900!important;letter-spacing:.02em}
+.site-header nav a.active,.site-header nav a:hover{color:var(--navbar-accent)!important}
+.site-header nav a.active:after{background:var(--navbar-accent)!important;bottom:-12px!important}
 .site-header .nav-cta{min-height:44px!important;background:#f5b535!important;color:#15100a!important;border-color:#f5b535!important;box-shadow:none!important}
 .site-header.is-scrolled .nav-cta{background:#8d1f16!important;color:#fff!important;border-color:#8d1f16!important}
 

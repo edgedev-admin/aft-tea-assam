@@ -7,7 +7,6 @@ import {
   type MotionStyle,
   type MotionValue,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useTransform,
   useMotionValueEvent
@@ -15,6 +14,7 @@ import {
 import type { CSSProperties, RefObject } from "react";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { cloudinaryImageSrcSet } from "../lib/cloudinary-media";
+import { usePrefersReducedMotion } from "../lib/use-prefers-reduced-motion";
 import {
   campaignMosaicRows,
   campaignScenes,
@@ -397,8 +397,7 @@ export function ScrollProductExperience() {
   const stageWidth = useMotionValue(1);
   const stageHeight = useMotionValue(1);
   const [geometryReady, setGeometryReady] = useState(false);
-  const [useMobileTransforms, setUseMobileTransforms] = useState(false);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end end"]
@@ -414,24 +413,15 @@ export function ScrollProductExperience() {
   );
   const featureTransformOne = useExpandedTransform(expansionProgress, featureStartOne, featureStartThree, stageWidth, stageHeight);
   const featureTransformTwo = useExpandedTransform(expansionProgress, featureStartTwo, featureStartThree, stageWidth, stageHeight);
-  const featureTransformThree = useExpandedTransform(expansionProgress, featureStartThree, featureStartThree, stageWidth, stageHeight);
   const featureTransformFour = useExpandedTransform(expansionProgress, featureStartFour, featureStartThree, stageWidth, stageHeight);
   const featureTransformFive = useExpandedTransform(expansionProgress, featureStartFive, featureStartThree, stageWidth, stageHeight);
   const featureTransforms = useMemo(() => [
     featureTransformOne,
     featureTransformTwo,
-    useMobileTransforms ? featureTransformThree : null,
+    null,
     featureTransformFour,
     featureTransformFive
-  ], [featureTransformFive, featureTransformFour, featureTransformOne, featureTransformThree, featureTransformTwo, useMobileTransforms]);
-
-  useLayoutEffect(() => {
-    const query = window.matchMedia("(max-width: 700px)");
-    const update = () => setUseMobileTransforms(query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
+  ], [featureTransformFive, featureTransformFour, featureTransformOne, featureTransformTwo]);
 
   useLayoutEffect(() => {
     const sticky = stickyRef.current;

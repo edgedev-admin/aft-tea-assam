@@ -1,0 +1,7 @@
+.media .poster { z-index:0;opacity:1; }
+.poster picture { position:absolute;inset:0;display:block; }
+.media .video { position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .2s ease; }
+.media .video[data-ready="true"] { opacity:1; }
+.control { position:absolute;right:max(20px,env(safe-area-inset-right));bottom:24px;z-index:3;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(8,34,25,.55);color:#fff;cursor:pointer; }
+.control:focus-visible { outline:3px solid #f3c846;outline-offset:3px; }
+@media(prefers-reduced-motion:reduce) { .media .video { display:block;transition:none; } }

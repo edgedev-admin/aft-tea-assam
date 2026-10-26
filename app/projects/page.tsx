@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "../../lib/seo";
 import { AftPage, AftSection, CardGrid, PageCta } from "../../components/aft-page";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Company Journey",
   description: "AFT Techno Trade's journey from its 2018 establishment in Upper Assam to specialty, CTC and consumer tea supply.",
-  alternates: { canonical: "/projects" }
-};
+  path: "/projects",
+});
 
 const cards = [
   { eyebrow: "2018", title: "Established in Upper Assam", text: "AFT Techno Trade began in the Dikom and Lahowal area of Dibrugarh district." },

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "../../lib/seo";
 import { FileCheck2 } from "lucide-react";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
 import { COMPANY_CONTACT } from "../../lib/company";
 import "../legal.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Use",
   description: "Draft terms governing use of the AFT Techno Trade informational and enquiry website.",
-  alternates: { canonical: "/terms" },
-  robots: { index: false, follow: true },
-};
+  path: "/terms",
+  index: false,
+});
 
 export default function TermsPage() {
   return <div className="legal-page">

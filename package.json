@@ -11,16 +11,19 @@
     "start": "next start",
     "lint": "eslint .",
     "media:upload": "node --experimental-strip-types scripts/upload-media-to-cloudinary.ts",
-    "test:enquiries": "node --test --experimental-strip-types tests/enquiries.test.ts"
+    "test:enquiries": "node --test --experimental-strip-types tests/enquiries.test.ts",
+    "test:whatsapp": "node --test --experimental-strip-types tests/whatsapp.test.ts",
+    "test:seo": "node --test --experimental-strip-types tests/seo.test.ts"
   },
   "dependencies": {
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "latest",
     "lucide-react": "latest",
     "next": "16.4.1",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^5.7.0",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",

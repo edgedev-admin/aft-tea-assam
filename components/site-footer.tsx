@@ -4,7 +4,8 @@ import { ArrowUp, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { COMPANY_CONTACT } from "../lib/company";
+import { businessContacts, COMPANY_CONTACT, phoneHref } from "../lib/company";
+import { WhatsAppAction } from "./whatsapp-action";
 import "../app/footer.css";
 
 type FooterLink = { label: string; href: string };
@@ -36,7 +37,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
   return <section className="footer-column"><h2>{title}</h2><nav aria-label={`${title} links`}>{links.map((link) => <Link href={link.href} key={link.label}>{link.label}</Link>)}</nav></section>;
 }
 
-export function SiteFooter() {
+export function SiteFooter({ productName }: { productName?: string } = {}) {
   const year = new Date().getFullYear();
 
   function scrollToTop() {
@@ -71,9 +72,10 @@ export function SiteFooter() {
         <section className="footer-column footer-contact" aria-labelledby="footer-contact-title">
           <h2 id="footer-contact-title">Contact</h2>
           <div className="footer-location"><MapPin size={18}/><p><strong>AFT Techno Trade</strong><span>Dikom &amp; Lahowal<br/>Dibrugarh, Assam 786010</span></p></div>
-          <a className="footer-detail-link" href={COMPANY_CONTACT.phoneHref}><Phone size={15}/>{COMPANY_CONTACT.phone}</a>
+          {businessContacts.map((contact) => <div className="footer-phone-row" key={contact.id}><a className="footer-detail-link" href={phoneHref(contact)} aria-label={`Call ${contact.label}: ${contact.display}`}><Phone size={15}/>{contact.display}</a></div>)}
           <a className="footer-detail-link" href={COMPANY_CONTACT.emailHref}><Mail size={15}/>{COMPANY_CONTACT.email}</a>
-          <div className="footer-socials"><a href="https://www.instagram.com/aftteaindia/" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Instagram"><FaInstagram aria-hidden="true"/></a><a href="https://www.facebook.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on Facebook"><FaFacebookF aria-hidden="true"/></a><a href="https://x.com/AFTTeaIndia" target="_blank" rel="noreferrer" aria-label="AFT Tea India on X"><FaXTwitter aria-hidden="true"/></a></div>
+          <WhatsAppAction productName={productName} />
+          <div className="footer-socials"><a href="https://www.instagram.com/aftteaindia/" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on Instagram"><FaInstagram aria-hidden="true"/></a><a href="https://www.facebook.com/AFTTeaIndia" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on Facebook"><FaFacebookF aria-hidden="true"/></a><a href="https://x.com/AFTTeaIndia" target="_blank" rel="noopener noreferrer" aria-label="AFT Tea India on X"><FaXTwitter aria-hidden="true"/></a></div>
           <Link className="footer-contact-link" href="/contact">Start an enquiry <ArrowUpRight size={15}/></Link>
         </section>
       </div>

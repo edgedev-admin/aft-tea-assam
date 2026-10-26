@@ -1,31 +1,29 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "../../lib/seo";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, Boxes, Leaf, MapPin, PackageCheck, Scale, ScanLine } from "lucide-react";
 import { CraftProcessJourney } from "../../components/craft-process-journey";
+import { CraftGradeExplorer } from "../../components/craft-grade-explorer";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
 import { CloudinaryImage } from "../../components/cloudinary-image";
+import { aftAssets } from "../../lib/media/aft-assets";
+import { teaCollections } from "../../lib/products";
 import { cuppingCriteria } from "../../lib/craft-process";
 import styles from "./craft.module.css";
 
-export const metadata: Metadata = {
-  title: { absolute: "Our Tea Craft & Manufacturing Process | AFT Techno Trade" },
+export const metadata: Metadata = pageMetadata({
+  title: "Our Tea Craft & Manufacturing Process | AFT Techno Trade",
   description: "Explore the tea-making process at AFT Techno Trade in Upper Assam, from leaf selection and withering to specialty tea, CTC processing, grading and cupping.",
-  alternates: { canonical: "/craft" },
-};
+  path: "/craft",
+});
 
 const finishingStages = [
   { number: "01", title: "Oxidation & flavour", text: "Oxidation is managed according to the tea style being made, contributing to colour, aroma and flavour development." },
   { number: "02", title: "Drying & stabilisation", text: "Drying arrests further change and helps stabilise the tea before it moves into finishing and evaluation." },
   { number: "03", title: "Sorting & grading", text: "The finished leaf is sorted by form and particle size so that each grade can be prepared for its intended use." },
 ];
-
-const grades = [
-  ["BP", "Broken Pekoe", "A broken-leaf CTC grade."],
-  ["PF", "Pekoe Fannings", "A smaller, quick-infusing grade."],
-  ["PD", "Pekoe Dust", "A fine CTC grade used for strong extraction."],
-  ["ORTH", "Selected orthodox", "Whole-leaf and specialty classifications vary by tea."],
-] as const;
+const ctcGrades = teaCollections.find((collection) => collection.id === "ekoratoli")?.offerings.filter((item) => ["Broken Pekoe (BP)", "Pekoe Fannings (PF)", "Pekoe Dust (PD)"].includes(item.name)) ?? [];
 
 export default function CraftPage() {
   return (
@@ -33,13 +31,13 @@ export default function CraftPage() {
       <SiteNavbar />
       <main id="main" className={styles.page}>
         <section className={styles.hero} aria-labelledby="craft-hero-title">
-          <CloudinaryImage className={styles.heroImage} src="/images/tea/assam-dawn.png" alt="Tea-growing landscape at dawn in Assam" fill sizes="100vw" preload />
+          <CloudinaryImage className={styles.heroImage} src="/images/story/factory-machinery.jpg" alt="Tea-processing machinery handling fresh leaves inside the AFT factory" fill sizes="100vw" preload quality={90} />
           <div className={styles.heroShade} />
           <div className={styles.heroGrid} aria-hidden="true" />
           <div className={styles.heroInner}>
             <p className={styles.heroEyebrow}>Our Craft · AFT Techno Trade</p>
             <h1 id="craft-hero-title">Every leaf.<br />Every detail.</h1>
-            <p className={styles.heroCopy}>From careful leaf selection to processing, grading and tasting, our work brings together the craft of specialty tea and the discipline of Assam CTC manufacturing.</p>
+            <p className={styles.heroCopy}>From the first inspection of fresh leaves to the careful preparation of finished tea, discover the work and decisions behind AFT Techno Trade&apos;s Assam tea.</p>
             <Link className={styles.heroAction} href="#process">Explore Our Process <ArrowDown size={16} /></Link>
           </div>
           <p className={styles.heroLocation}><MapPin size={15} /> Dikom &amp; Lahowal · Upper Assam</p>
@@ -50,19 +48,16 @@ export default function CraftPage() {
             <div className={styles.originGrid}>
               <header className={styles.originHeading}>
                 <p className={styles.eyebrow}>01 / Close to the source</p>
-                <h2 id="origin-title">Where good tea begins.</h2>
+                <h2 id="origin-title">Where the leaf begins its journey.</h2>
               </header>
               <div className={styles.originCopy}>
-                <p>In Dikom and Lahowal, near Dibrugarh, AFT Techno Trade works within one of Assam&apos;s established tea-growing regions. This connection to the source informs how fresh leaf is received, inspected and prepared for processing.</p>
-                <p>The journey to a finished cup begins long before the tea reaches a packet. Leaf condition, handling and timely processing help shape what comes next.</p>
+                <p>Working close to Assam&apos;s tea-growing landscape, AFT Techno Trade connects knowledge of fresh leaf with the demands of manufacturing and tea preparation.</p>
               </div>
             </div>
-            <div className={styles.placePanel}>
-              <div className={styles.placeMark} aria-hidden="true"><MapPin strokeWidth={1.2} /></div>
-              <p>Tea country</p>
-              <strong>Upper Assam</strong>
-              <div className={styles.placeDetails}><span>Dikom</span><span>Lahowal</span><span>Dibrugarh district</span></div>
-            </div>
+            <figure className={styles.originPhoto}>
+              <CloudinaryImage src={aftAssets.teaGardens.aerialGarden.src} alt={aftAssets.teaGardens.aerialGarden.alt} fill quality={90} sizes="(max-width: 800px) calc(100vw - 40px), 68vw" style={{ objectPosition: aftAssets.teaGardens.aerialGarden.objectPosition }} />
+              <figcaption><MapPin size={14} /> Dikom · Lahowal · Dibrugarh · Upper Assam</figcaption>
+            </figure>
           </div>
         </section>
 
@@ -76,14 +71,16 @@ export default function CraftPage() {
           </header>
           <div className={styles.pathsGrid}>
             <article className={styles.specialtyPath}>
+              <figure className={styles.pathPhoto}><CloudinaryImage src={aftAssets.teaLeavesAndTextures.freshLeafInspection.src} alt={aftAssets.teaLeavesAndTextures.freshLeafInspection.alt} fill quality={90} sizes="(max-width: 800px) calc(100vw - 44px), 50vw" /><figcaption>Fresh leaf inspection · contextual specialty imagery</figcaption></figure>
               <div className={styles.pathTopline}><span>Nahorchukbari</span><Leaf size={20} /></div>
               <p className={styles.pathIndex}>Path 01 / Specialty tea</p>
-              <h3>Craft that preserves the leaf.</h3>
-              <p>For selected specialty offerings, gentle leaf handling, careful rolling and controlled processing help preserve delicate leaf structure and develop distinctive aromatic character.</p>
-              <ul><li>Selective leaf handling</li><li>Careful rolling</li><li>Whole-leaf and golden-tip selections</li><li>Small-batch specialty craftsmanship</li></ul>
+              <h3>Craft that respects the leaf.</h3>
+              <p>Selected specialty teas use careful leaf handling and methods suited to their intended character. The route varies by tea; the aim is to retain the qualities of the leaf in the finished cup.</p>
+              <ul><li>Careful leaf handling</li><li>Methods suited to the tea</li><li>Distinct leaf character</li><li>Specialty selections by enquiry</li></ul>
               <Link href="/teas#nahorchukbari">Explore Specialty Teas <ArrowRight size={16} /></Link>
             </article>
             <article className={styles.ctcPath}>
+              <figure className={styles.pathPhoto}><CloudinaryImage src={aftAssets.teaLeavesAndTextures.ctcGranules.src} alt={aftAssets.teaLeavesAndTextures.ctcGranules.alt} fill quality={90} sizes="(max-width: 800px) calc(100vw - 44px), 50vw" /><figcaption>CTC tea granules · a close-up of the finished material</figcaption></figure>
               <div className={styles.pathTopline}><span>Ekoratoli</span><Boxes size={20} /></div>
               <p className={styles.pathIndex}>Path 02 / CTC tea</p>
               <h3>Precision for a stronger cup.</h3>
@@ -105,11 +102,10 @@ export default function CraftPage() {
               {finishingStages.map((stage) => <article key={stage.number}><span>{stage.number}</span><h3>{stage.title}</h3><p>{stage.text}</p></article>)}
             </div>
             <div className={styles.gradeGuide} aria-labelledby="grade-guide-title">
-              <div className={styles.gradeIntro}><Scale size={22} /><p className={styles.eyebrow}>A compact grade guide</p><h3 id="grade-guide-title">Form follows purpose.</h3></div>
-              <div className={styles.gradeRows}>
-                {grades.map(([short, name, text]) => <article key={short}><strong>{short}</strong><h4>{name}</h4><p>{text}</p></article>)}
-              </div>
+              <div className={styles.gradeIntro}><p className={styles.eyebrow}>A compact grade guide</p><h3 id="grade-guide-title">Form follows purpose.</h3><p>Choose a listed Ekoratoli grade to see its catalogue description.</p></div>
+              <CraftGradeExplorer grades={ctcGrades} />
             </div>
+            <figure className={styles.qualityPhoto}><CloudinaryImage src="/images/story/factory-inspection.jpg" alt="Two workers examining tea leaves at a factory work table" fill quality={90} sizes="(max-width: 800px) calc(100vw - 40px), 50vw" /><figcaption>Workers examining tea leaves at a factory work table.</figcaption></figure>
           </div>
         </section>
 
@@ -118,8 +114,9 @@ export default function CraftPage() {
             <div className={styles.cuppingLayout}>
               <header className={styles.cuppingLead}>
                 <p className={styles.eyebrowLight}>The cup is the final test</p>
-                <h2 id="cupping-title">The cup tells us what the leaf has become.</h2>
-                <p>Before tea is prepared for supply, representative samples are evaluated for appearance, liquor and sensory character. Cupping helps connect the decisions made during processing with the experience of brewing and drinking the tea.</p>
+                <h2 id="cupping-title">The final judgment is in the cup.</h2>
+                <p>Tea is considered through its dry and infused leaf, liquor, body, aroma and finish. Sensory evaluation brings processing decisions back to the brewed tea.</p>
+                <figure className={styles.cupPhoto}><CloudinaryImage src={aftAssets.teaLeavesAndTextures.woodenScoop.src} alt={aftAssets.teaLeavesAndTextures.woodenScoop.alt} fill quality={90} sizes="(max-width: 800px) calc(100vw - 40px), 32vw" /><figcaption>Finished dry tea · no cupping-room photograph is available.</figcaption></figure>
               </header>
               <div className={styles.cuppingCriteria}>
                 {cuppingCriteria.map(([number, title, text]) => <article key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div><ScanLine size={20} aria-hidden="true" /></article>)}

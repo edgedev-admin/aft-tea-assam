@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Sprout } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform
 } from "framer-motion";
 import { useRef } from "react";
+import { usePrefersReducedMotion } from "../lib/use-prefers-reduced-motion";
 import styles from "./golden-pearl-story.module.css";
 
 const subdued = "#F0B7AA";
@@ -17,19 +17,22 @@ const emphasised = "#FFFFFF";
 const collections = [
   {
     name: "Nahorchukbari",
-    description: "Handcrafted Golden Pearl, golden bud selections and fine orthodox leaf grades for specialty tea buyers.",
+    positioning: "The Art of Specialty Tea",
+    description: "Handcrafted specialty selections reflecting the possibilities of carefully made Assam tea.",
     href: "/teas#nahorchukbari",
     cta: "Explore specialty tea"
   },
   {
     name: "Ekoratoli",
-    description: "Commercial BP, PF, PD and clonal CTC offerings developed for brisk, full-bodied milk tea.",
+    positioning: "Strength for Everyday Markets",
+    description: "Commercial CTC grades developed for the requirements of wholesale and professional tea buyers.",
     href: "/teas#ekoratoli",
     cta: "Explore CTC grades"
   },
   {
     name: "Ajanta Tea",
-    description: "Classic Assam, premium and spiced consumer teas for the varied rhythms of the everyday cup.",
+    positioning: "Assam Tea for Everyday Moments",
+    description: "Classic Assam, premium blends and flavoured consumer teas created for different tastes and occasions.",
     href: "/teas#ajanta-tea",
     cta: "Explore Ajanta Tea"
   }
@@ -37,15 +40,15 @@ const collections = [
 
 export function GoldenPearlStory() {
   const storyRef = useRef<HTMLElement>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
     target: storyRef,
     offset: ["start start", "end end"]
   });
-  const crafted = useTransform(scrollYProgress, [0.04, 0.24], [subdued, emphasised]);
-  const byHand = useTransform(scrollYProgress, [0.16, 0.42], [subdued, emphasised]);
-  const recognised = useTransform(scrollYProgress, [0.4, 0.68], [subdued, emphasised]);
-  const atAuction = useTransform(scrollYProgress, [0.6, 0.88], [subdued, emphasised]);
+  const every = useTransform(scrollYProgress, [0.04, 0.24], [subdued, emphasised]);
+  const remarkableCup = useTransform(scrollYProgress, [0.16, 0.42], [subdued, emphasised]);
+  const begins = useTransform(scrollYProgress, [0.4, 0.68], [subdued, emphasised]);
+  const atOrigin = useTransform(scrollYProgress, [0.6, 0.88], [subdued, emphasised]);
   const reducedStyle = reduceMotion ? { color: emphasised } : undefined;
 
   return (
@@ -53,58 +56,48 @@ export function GoldenPearlStory() {
       <section ref={storyRef} className={styles.redStory} aria-labelledby="golden-pearl-statement">
         <div className={styles.storySticky}>
           <div className={styles.shell}>
-            <p className={styles.eyebrow}>Nahorchukbari <span aria-hidden="true">·</span> Golden Pearl</p>
+            <p className={styles.eyebrow}>Upper Assam <span aria-hidden="true">·</span> The art of tea</p>
             <h2 id="golden-pearl-statement" className={styles.headline}>
               <span className={styles.headlineLine}>
-                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: crafted }}>Crafted</motion.span>{" "}
-                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: byHand }}>by hand.</motion.span>
+                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: every }}>Every</motion.span>{" "}
+                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: remarkableCup }}>remarkable cup</motion.span>
               </span>
               <span className={styles.headlineLine}>
-                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: recognised }}>Recognised</motion.span>{" "}
-                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: atAuction }}>at auction.</motion.span>
+                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: begins }}>begins</motion.span>{" "}
+                <motion.span className={styles.headlineChunk} style={reducedStyle ?? { color: atOrigin }}>at its origin.</motion.span>
               </span>
             </h2>
             <div className={styles.storyFooter}>
-              <p>On 14 February 2022, one kilogram of Golden Pearl, handcrafted at Nahorchukbari in Upper Assam, was sold for ₹99,999 at the Guwahati Tea Auction Centre.</p>
-              <Link href="/teas/golden-pearl">
-                Discover the Golden Pearl Story <ArrowUpRight aria-hidden="true" size={17}/>
+              <p>Rooted in the tea-growing communities of Upper Assam, AFT Techno Trade brings together local knowledge, manufacturing expertise and a dedication to distinctive Assam tea.</p>
+              <Link href="/craft">
+                Explore Our Craft <ArrowUpRight aria-hidden="true" size={17}/>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.achievement} aria-labelledby="golden-pearl-achievement">
+      <section className={styles.achievement} aria-labelledby="tea-portfolio-title">
         <div className={styles.shell}>
-          <div className={styles.achievementGrid}>
-            <div className={styles.statBlock}>
-              <p className={styles.darkEyebrow}>A moment in Assam tea craft</p>
-              <p className={styles.stat} aria-label="99,999 rupees per kilogram">₹99,999<span>/kg</span></p>
-              <small>Historical auction result</small>
-            </div>
-            <div className={styles.achievementCopy}>
-              <h2 id="golden-pearl-achievement">A landmark Golden Pearl auction sale.</h2>
-              <p className={styles.date}>14 February 2022 <span aria-hidden="true">·</span> Guwahati Tea Auction Centre</p>
-              <p>Handcrafted at Nahorchukbari in Lahowal, Golden Pearl became part of a memorable chapter in Assam&apos;s specialty tea story.</p>
-              <Link href="/teas/golden-pearl">
-                Read the Full Story <ArrowUpRight aria-hidden="true" size={17}/>
-              </Link>
-            </div>
-          </div>
-
           <div className={styles.collections}>
             <header className={styles.collectionsHeading}>
-              <p><Sprout aria-hidden="true" size={15}/> Our tea collections</p>
-              <h2>Three identities. One Upper Assam foundation.</h2>
+              <p className={styles.portfolioEyebrow}>The AFT Tea Portfolio</p>
+              <h2 id="tea-portfolio-title">From everyday strength to rare tea craft.</h2>
+              <p className={styles.collectionsIntroduction}>Rooted in Upper Assam, our collections bring together distinctive specialty teas, commercial CTC grades and familiar consumer favourites.</p>
             </header>
             <div className={styles.collectionList}>
               {collections.map((collection) => (
                 <article key={collection.name}>
-                  <h3>{collection.name}</h3>
-                  <p>{collection.description}</p>
-                  <Link href={collection.href}>
-                    {collection.cta} <ArrowUpRight aria-hidden="true" size={15}/>
-                  </Link>
+                  <div className={styles.collectionIdentity}>
+                    <h3>{collection.name}</h3>
+                    <p>{collection.positioning}</p>
+                  </div>
+                  <div className={styles.collectionDetails}>
+                    <p>{collection.description}</p>
+                    <Link href={collection.href}>
+                      {collection.cta} <ArrowUpRight aria-hidden="true" size={15}/>
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>

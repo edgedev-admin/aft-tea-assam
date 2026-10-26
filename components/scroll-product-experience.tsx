@@ -447,6 +447,8 @@ export function ScrollProductExperience() {
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(sticky);
+    const track = sticky.querySelector(".product-motion-feature-track");
+    if (track) observer.observe(track);
     slots.forEach((slot) => {
       if (slot) observer.observe(slot);
     });

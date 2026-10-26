@@ -22,10 +22,6 @@ export const metadata: Metadata = {
   description: "AFT Techno Trade manufactures, processes and supplies Assam tea from Dikom and Lahowal, including specialty teas, CTC grades and the Ajanta Tea collection.",
   applicationName: "AFT Techno Trade",
   keywords: ["AFT Techno Trade", "Upper Assam tea", "Assam CTC tea", "Golden Pearl tea", "Nahorchukbari", "Ekoratoli", "Ajanta Tea", "tea wholesale"],
-  icons: {
-    icon: "/branding/aft-circular-seal.svg",
-    apple: "/aft-tea-factory-logo.png"
-  },
   robots: isVercelPreview ? { index: false, follow: false, noarchive: true } : undefined,
   openGraph: {
     title: "AFT Techno Trade",

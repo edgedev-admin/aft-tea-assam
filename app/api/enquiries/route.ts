@@ -45,7 +45,17 @@ function isAllowedOrigin(request: Request) {
   if (fetchSite && !["same-origin", "same-site", "none"].includes(fetchSite)) return false;
   if (!origin) return true;
 
-  const allowed = new Set([new URL(request.url).origin]);
+  const requestUrl = new URL(request.url);
+  const incomingHost = request.headers.get("host");
+  const forwardedProtocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const protocol = forwardedProtocol === "https" || forwardedProtocol === "http" ? `${forwardedProtocol}:` : requestUrl.protocol;
+  // Next can use an internal hostname in request.url. The browser's Origin
+  // must match the original HTTP host and protocol, including local previews.
+  let requestOrigin = requestUrl.origin;
+  if (incomingHost) {
+    try { requestOrigin = new URL(`${protocol}//${incomingHost}`).origin; } catch { return false; }
+  }
+  const allowed = new Set([requestOrigin]);
   const configuredSite = process.env.SITE_URL?.trim();
   if (configuredSite) {
     try { allowed.add(new URL(configuredSite).origin); } catch { return false; }

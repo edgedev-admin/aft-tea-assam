@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { organizationData, SITE_URL } from "../lib/seo";
+import { StructuredData } from "../components/structured-data";
 import "./base.css";
 import "./mobile-optimizations.css";
 import "./responsive-polish.css";
@@ -15,7 +17,7 @@ const aftAssameseLogo = localFont({ src: "../public/fonts/Li Purno Pran Unicode.
 const isVercelPreview = process.env.VERCEL_ENV === "preview";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.afttechnotrade.com"),
+  metadataBase: new URL(SITE_URL),
   title: { default: "AFT Techno Trade", template: "%s | AFT Techno Trade" },
   description: "AFT Techno Trade manufactures, processes and supplies Assam tea from Dikom and Lahowal, including specialty teas, CTC grades and the Ajanta Tea collection.",
   applicationName: "AFT Techno Trade",
@@ -39,4 +41,4 @@ export const metadata: Metadata = {
     images: ["/images/tea/assam-dawn.png"]
   }
 };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body className={`${inter.variable} ${playfair.variable} ${aftEnglishLogo.variable} ${aftAssameseLogo.variable}`}><a className="skip-link" href="#main">Skip to content</a>{children}</body></html>; }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body className={`${inter.variable} ${playfair.variable} ${aftEnglishLogo.variable} ${aftAssameseLogo.variable}`}><a className="skip-link" href="#main">Skip to content</a><StructuredData data={organizationData} />{children}</body></html>; }

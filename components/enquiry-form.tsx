@@ -11,6 +11,7 @@ type EnquiryFormProps = {
   wholesale?: boolean;
   variant?: "contact" | "default";
   defaultType?: string;
+  productContext?: string;
 };
 
 type FieldName = "name" | "email" | "phone" | "business" | "type" | "quantity" | "destination" | "message";
@@ -55,7 +56,7 @@ function createSubmissionId() {
     : `${Date.now()}_${Math.random().toString(36).slice(2)}`;
 }
 
-export function EnquiryForm({ wholesale = false, variant = "default", defaultType = "" }: EnquiryFormProps) {
+export function EnquiryForm({ wholesale = false, variant = "default", defaultType = "", productContext }: EnquiryFormProps) {
   const [notice, setNotice] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [selectedType, setSelectedType] = useState(defaultType);
@@ -142,6 +143,7 @@ export function EnquiryForm({ wholesale = false, variant = "default", defaultTyp
       destination: showSupplyFields ? value(form, "destination") : "",
       message: value(form, "message"),
       source: wholesale ? "wholesale" : "contact",
+      ...(productContext ? { productContext } : {}),
       companyWebsite: value(form, "companyWebsite"),
       formStartedAt,
     };
@@ -244,7 +246,7 @@ export function EnquiryForm({ wholesale = false, variant = "default", defaultTyp
       </>}
       <label className="wide" htmlFor={`${baseId}-message`}>
         <span className="field-label">Message <em>Required</em></span>
-        <textarea id={`${baseId}-message`} name="message" rows={contactVariant ? 6 : 7} minLength={10} maxLength={4000} required placeholder={wholesale ? "Share the tea type, preferred grade or cup profile, intended use, packaging needs and any other relevant details." : "Tell us about the tea or business requirement you have in mind."} onChange={() => clearFieldError("message")} aria-invalid={Boolean(errors.message)} aria-describedby={fieldError("message")} />
+        <textarea id={`${baseId}-message`} name="message" defaultValue={productContext ? `I would like more information about ${productContext}.` : undefined} rows={contactVariant ? 6 : 7} minLength={10} maxLength={4000} required placeholder={wholesale ? "Share the tea type, preferred grade or cup profile, intended use, packaging needs and any other relevant details." : "Tell us about the tea or business requirement you have in mind."} onChange={() => clearFieldError("message")} aria-invalid={Boolean(errors.message)} aria-describedby={fieldError("message")} />
         <span className="form-field-error" id={`${baseId}-message-error`}>{errors.message || "\u00a0"}</span>
       </label>
       <label className="form-honeypot" aria-hidden="true">Company website<input name="companyWebsite" tabIndex={-1} autoComplete="off" /></label>

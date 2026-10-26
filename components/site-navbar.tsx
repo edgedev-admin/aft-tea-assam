@@ -16,19 +16,39 @@ const links = [
   { label: "About Us", href: "/about" },
   { label: "Our Craft", href: "/craft" },
   { label: "Wholesale", href: "/wholesale" },
+  { label: "Gallery", href: "/gallery" },
 ];
 const mobileLinks = [
   ...links,
-  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
 const enquiryHref = "/contact";
+type NavbarTheme = "overlay-dark" | "solid-light";
+
+const overlayDarkRoutes = new Set([
+  "/",
+  "/about",
+  "/craft",
+  "/projects",
+  "/wholesale"
+]);
+
+function navbarThemeFor(pathname: string): NavbarTheme {
+  return overlayDarkRoutes.has(pathname) ? "overlay-dark" : "solid-light";
+}
+
+function activeState(pathname: string, href: string) {
+  if (pathname === href) return "page" as const;
+  if (href !== "/" && pathname.startsWith(`${href}/`)) return "location" as const;
+  return undefined;
+}
 
 export function SiteNavbar() {
   const pathname = usePathname();
-  const hasLightHero = pathname === "/teas" || pathname === "/contact";
+  const navbarTheme = navbarThemeFor(pathname);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const usesDarkForeground = isScrolled || navbarTheme === "solid-light";
   const scrollSentinelRef = useRef<HTMLSpanElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -93,7 +113,7 @@ export function SiteNavbar() {
     return () => { document.body.style.overflow = previousOverflow; };
   }, [isOpen]);
 
-  return <><span ref={scrollSentinelRef} className="nav-scroll-sentinel" aria-hidden="true"/><header className={`site-header ${isScrolled ? "is-scrolled" : ""} ${hasLightHero ? "is-light-hero" : ""}`}>
+  return <><span ref={scrollSentinelRef} className="nav-scroll-sentinel" aria-hidden="true"/><header className={`site-header nav-theme-${navbarTheme}${isScrolled ? " is-scrolled" : ""}`} data-navbar-theme={navbarTheme}>
     <div className="utility-strip">
       <div className="utility-strip-inner">
         <p>{COMPANY_CONTACT.utilityLabel}</p>
@@ -109,11 +129,14 @@ export function SiteNavbar() {
       </button>
       <Link className="brand" href="/">
         <span className="motion-sr-only">A.F.T TECHNO TRADE</span>
-        <AnimatedBrandLogo tone={isScrolled || hasLightHero ? "dark" : "light"} />
+        <AnimatedBrandLogo tone={usesDarkForeground ? "dark" : "light"} />
       </Link>
       <nav aria-label="Primary navigation">
-        {links.map((link) => <Link className={pathname === link.href ? "active" : ""} href={link.href} key={link.label}>{link.label}</Link>)}
-        <Link className={pathname === enquiryHref ? "active" : ""} href={enquiryHref}>Contact</Link>
+        {links.map((link) => {
+          const current = activeState(pathname, link.href);
+          return <Link className={current ? "active" : ""} href={link.href} aria-current={current} key={link.label}>{link.label}</Link>;
+        })}
+        <Link className={pathname === enquiryHref ? "active" : ""} href={enquiryHref} aria-current={pathname === enquiryHref ? "page" : undefined}>Contact</Link>
       </nav>
       <Link className="nav-cta" href={enquiryHref}>Enquire <ArrowUpRight size={16} /></Link>
     </div>
@@ -127,7 +150,10 @@ export function SiteNavbar() {
         <button ref={closeButtonRef} className="mobile-drawer-close" type="button" aria-label="Close navigation" onClick={() => closeDrawer()}><X size={20}/></button>
       </div>
       <nav aria-label="Mobile navigation">
-        {mobileLinks.map((link) => <Link className={pathname === link.href ? "active" : ""} href={link.href} onClick={() => closeDrawer(false)} key={link.label}><span>{link.label}</span><ChevronRight size={17}/></Link>)}
+        {mobileLinks.map((link) => {
+          const current = activeState(pathname, link.href);
+          return <Link className={current ? "active" : ""} href={link.href} aria-current={current} onClick={() => closeDrawer(false)} key={link.label}><span>{link.label}</span><ChevronRight size={17}/></Link>;
+        })}
       </nav>
       <Link className="nav-cta" href={enquiryHref} onClick={() => closeDrawer(false)}>Enquire <ArrowUpRight size={16} /></Link>
     </div>

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "../../lib/seo";
 import { ShieldCheck } from "lucide-react";
 import { SiteFooter } from "../../components/site-footer";
 import { SiteNavbar } from "../../components/site-navbar";
 import { COMPANY_CONTACT } from "../../lib/company";
 import "../legal.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Notice",
   description: "Draft privacy notice describing how AFT Techno Trade handles website enquiries.",
-  alternates: { canonical: "/privacy" },
-  robots: { index: false, follow: true },
-};
+  path: "/privacy",
+  index: false,
+});
 
 export default function PrivacyPage() {
   return <div className="legal-page">

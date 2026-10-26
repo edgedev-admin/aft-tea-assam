@@ -32,8 +32,7 @@
 }
 
 .eyebrow,
-.darkEyebrow,
-.collectionsHeading > p {
+.portfolioEyebrow {
   margin: 0;
   font-size: 12px;
   font-weight: 900;
@@ -45,8 +44,7 @@
   color: #ffd65c;
 }
 
-.eyebrow span,
-.date span {
+.eyebrow span {
   margin: 0 0.45em;
 }
 
@@ -85,7 +83,6 @@
 }
 
 .storyFooter a,
-.achievementCopy a,
 .collectionList a {
   display: inline-flex;
   width: fit-content;
@@ -103,21 +100,17 @@
 
 .storyFooter a:hover svg,
 .storyFooter a:focus-visible svg,
-.achievementCopy a:hover svg,
-.achievementCopy a:focus-visible svg,
 .collectionList a:hover svg,
 .collectionList a:focus-visible svg {
   transform: translate(2px, -2px);
 }
 
 .storyFooter svg,
-.achievementCopy svg,
 .collectionList svg {
   transition: transform 180ms ease;
 }
 
 .storyFooter a:focus-visible,
-.achievementCopy a:focus-visible,
 .collectionList a:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 6px;
@@ -130,42 +123,10 @@
   padding: clamp(78px, 9vw, 132px) 0 clamp(58px, 5vw, 76px);
 }
 
-.achievementGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
-  gap: clamp(48px, 8vw, 120px);
-  align-items: end;
-}
-
-.darkEyebrow,
-.collectionsHeading > p {
+.portfolioEyebrow {
   color: #66440d;
 }
 
-.stat {
-  margin: 20px 0 6px;
-  font-family: var(--font-sans), Arial, sans-serif;
-  font-size: clamp(72px, 10vw, 154px);
-  font-weight: 900;
-  line-height: 0.86;
-  letter-spacing: 0;
-  white-space: nowrap;
-}
-
-.stat span {
-  font-size: 0.28em;
-  font-weight: 800;
-}
-
-.statBlock small {
-  display: block;
-  margin-top: 16px;
-  color: #66440d;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.achievementCopy h2,
 .collectionsHeading h2 {
   margin: 0;
   font-family: var(--font-sans), Arial, sans-serif;
@@ -173,44 +134,13 @@
   letter-spacing: 0;
 }
 
-.achievementCopy h2 {
-  max-width: 650px;
-  font-size: clamp(38px, 4.4vw, 64px);
-  line-height: 1;
-}
-
-.achievementCopy p {
-  max-width: 580px;
-  margin: 20px 0 0;
-  color: #493818;
-  font-size: 16px;
-  line-height: 1.65;
-}
-
-.achievementCopy .date {
-  color: var(--story-ink);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.achievementCopy a {
-  margin-top: 26px;
-  color: var(--story-ink);
-}
-
 .collections {
   display: grid;
-  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(44px, 7vw, 94px);
-  margin-top: clamp(82px, 10vw, 142px);
-  padding-top: clamp(56px, 7vw, 88px);
-  border-top: 1px solid rgb(29 36 31 / 35%);
 }
 
-.collectionsHeading > p {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.portfolioEyebrow {
   margin-bottom: 20px;
 }
 
@@ -220,14 +150,22 @@
   line-height: 1;
 }
 
+.collectionsIntroduction {
+  max-width: 480px;
+  margin: 24px 0 0;
+  color: #493818;
+  font-size: 16px;
+  line-height: 1.68;
+}
+
 .collectionList {
   display: grid;
 }
 
 .collectionList article {
   display: grid;
-  grid-template-columns: minmax(150px, 0.52fr) minmax(240px, 1fr);
-  gap: 10px 28px;
+  grid-template-columns: minmax(175px, 0.58fr) minmax(240px, 1fr);
+  gap: 28px;
   padding: 26px 0 28px;
   border-top: 1px solid rgb(29 36 31 / 24%);
 }
@@ -238,13 +176,22 @@
 }
 
 .collectionList h3 {
-  grid-row: 1 / span 2;
   margin: 0;
   font-size: 22px;
   line-height: 1.15;
 }
 
-.collectionList p {
+.collectionIdentity p {
+  margin: 8px 0 0;
+  color: #66440d;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.collectionDetails > p {
   margin: 0;
   color: #493818;
   line-height: 1.58;
@@ -266,7 +213,6 @@
   }
 
   .storyFooter,
-  .achievementGrid,
   .collections {
     grid-template-columns: 1fr;
   }
@@ -275,7 +221,6 @@
     align-items: start;
   }
 
-  .achievementGrid,
   .collections {
     gap: 44px;
   }
@@ -299,8 +244,7 @@
   }
 
   .eyebrow,
-  .darkEyebrow,
-  .collectionsHeading > p {
+  .portfolioEyebrow {
     font-size: 10px;
   }
 
@@ -320,8 +264,7 @@
     line-height: 1.55;
   }
 
-  .storyFooter a,
-  .achievementCopy a {
+  .storyFooter a {
     font-size: 12px;
   }
 
@@ -329,28 +272,12 @@
     padding: 68px 0 80px;
   }
 
-  .achievementGrid,
   .collections {
     gap: 36px;
   }
 
-  .stat {
-    margin-top: 16px;
-    font-size: clamp(60px, 19.5vw, 84px);
-  }
-
-  .achievementCopy h2,
   .collectionsHeading h2 {
     font-size: 38px;
-  }
-
-  .achievementCopy p {
-    font-size: 15px;
-  }
-
-  .collections {
-    margin-top: 72px;
-    padding-top: 52px;
   }
 
   .collectionList article {
@@ -359,11 +286,18 @@
   }
 
   .collectionList h3 {
-    margin-bottom: 9px;
     font-size: 21px;
   }
 
-  .collectionList p {
+  .collectionIdentity p {
+    margin-top: 7px;
+  }
+
+  .collectionDetails {
+    margin-top: 16px;
+  }
+
+  .collectionDetails > p {
     font-size: 14px;
   }
 
@@ -407,7 +341,6 @@
   }
 
   .storyFooter svg,
-  .achievementCopy svg,
   .collectionList svg {
     transition: none;
   }

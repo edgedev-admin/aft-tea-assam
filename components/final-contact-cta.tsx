@@ -25,8 +25,8 @@ export function FinalContactCta() {
       </div>
       <figure className={styles.media}>
         <CloudinaryImage
-          src="/media/product-campaigns/Gold Tea 2.png"
-          alt="Ajanta Gold Assam tea pack photographed among green tea leaves"
+          src="/media/product-campaigns/AFT TEA COLLECTION.png"
+          alt="Ajanta Tea collection featuring High Societea, Gold, Elaichi and Kolkata Street Masala Chai"
           fill
           quality={90}
           sizes="(max-width: 800px) 100vw, 50vw"

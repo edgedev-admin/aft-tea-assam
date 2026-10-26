@@ -88,6 +88,28 @@ const approvedAssets: ApprovedAsset[] = [
     alt: "Kolkata Street Masala Chai package"
   },
   ...[
+    ["garden-path.jpg", "gardens/garden-path", "A path through rows of tea bushes beneath shade trees in Upper Assam", "photo-documentary"],
+    ["fresh-leaf.jpg", "gardens/fresh-leaf", "Tender fresh tea shoots growing above a bed of tea leaves", "photo-documentary"],
+    ["garden-shade.jpg", "gardens/garden-shade", "Rows of tea bushes growing beneath tall shade trees in Upper Assam", "photo-documentary"],
+    ["factory-leaf-receiving.jpg", "factory/fresh-leaf-receiving", "Fresh green tea leaves spread across a large factory receiving bed", "photo-documentary"],
+    ["factory-machinery.jpg", "factory/processing-machinery", "Tea-processing machinery handling fresh leaves inside the factory", "photo-documentary"],
+    ["factory-operations.jpg", "factory/operations-floor", "Conveyors and processing equipment across an operational tea factory floor", "photo-documentary"],
+    ["factory-exterior.jpg", "factory/exterior", "AFT tea factory buildings and courtyard in Upper Assam", "photo-documentary"],
+    ["ajanta-gold-campaign.png", "campaigns/ajanta/gold-garden", "Ajanta Gold tea presented with brewed tea in a tea garden", "product-campaign"],
+    ["ajanta-elaichi-campaign.jpg", "campaigns/ajanta/elaichi-garden", "Ajanta Elaichi tea presented with brewed tea in a tea garden", "product-campaign"],
+    ["ajanta-high-societea-campaign.jpg", "campaigns/ajanta/high-societea-garden", "High Societea presented with brewed tea among tea bushes", "product-campaign"],
+    ["ajanta-kolkata-masala-campaign.jpg", "campaigns/ajanta/kolkata-masala-garden", "Kolkata Street Masala Chai presented with brewed tea in a tea garden", "product-campaign"],
+    ["golden-pearl-jar.png", "products/nahorchukbari/golden-pearl-jar", "Transparent Nahorchukbari Golden Pearl tea jar", "product-packshot"],
+    ["garden-fresh-tote.png", "products/ekoratoli/garden-fresh-tote", "Garden Fresh Tea woven tote presentation", "product-packshot"]
+  ].map(([filename, publicId, alt, category]) => ({
+    localPath: `public/images/story/${filename}`,
+    publicId: `aft-techno-trade/${publicId}`,
+    resourceType: "image" as const,
+    category,
+    deliveryQuality: (category === "product-packshot" || category === "product-campaign" ? "auto:best" : "auto:good") as DeliveryQuality,
+    alt
+  })),
+  ...[
     ["AFT TEA COLLECTION.png", "collection/aft-tea-collection", "AFT Tea collection campaign"],
     ["Gold Tea 1.png", "gold/gold-tea-1", "Ajanta Gold campaign one"],
     ["Gold Tea 2.png", "gold/gold-tea-2", "Ajanta Gold campaign two"],

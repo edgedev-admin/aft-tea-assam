@@ -72,3 +72,5 @@
 @media(prefers-reduced-motion:reduce){
   .back-to-top i,.footer-brand-link svg,.footer-contact-link svg,.footer-column nav a,.footer-legal a{transition:none}
 }
+
+.footer-phone-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-block:5px}.footer-phone-row .footer-detail-link{min-height:40px;margin:0}.footer-contact>button{justify-content:flex-start}

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function GoldenPearlPage() {
-  redirect("/teas/golden-pearl");
+  permanentRedirect("/teas/golden-pearl");
 }

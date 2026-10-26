@@ -1,9 +1,24 @@
-:global(.video-hero) .headline {
+:global(.video-hero) :global(.video-hero-copy) {
   width: min(100%, 1040px);
+  max-width: 1040px;
+}
+
+:global(.video-hero) :global(.video-hero-inner) {
+  align-items: center;
+}
+
+:global(.video-hero) .headline {
+  width: 100%;
   max-width: 1040px;
   font-size: clamp(54px, 5.5vw, 84px);
   line-height: 1;
   letter-spacing: 0;
+  text-align: center;
+}
+
+:global(.video-hero) :global(.lede) {
+  max-width: 680px;
+  text-wrap: balance;
 }
 
 .line {
@@ -14,8 +29,13 @@
 @media (max-width: 620px) {
   :global(.video-hero) .headline {
     width: 100%;
+    max-width: 100%;
     font-size: 34px;
     line-height: 1.04;
+  }
+
+  :global(.video-hero) :global(.lede) {
+    max-width: 38ch;
   }
 }
 
@@ -29,4 +49,8 @@
   :global(.video-hero) .headline {
     font-size: 28px;
   }
+}
+
+@media (max-width: 340px) {
+  :global(.video-hero) .headline { font-size: 26px; }
 }

@@ -9,9 +9,11 @@
 .product-motion-row picture,.product-motion-feature-layer picture,.product-motion-scene__media picture{position:absolute;inset:0;display:block}
 .product-motion-row--feature{position:relative;width:100%;min-width:0;margin-left:0;z-index:2;overflow:visible;will-change:auto}
 .product-motion-feature-track{position:absolute;top:0;left:50%;display:flex;gap:var(--tile-gap);width:max-content;height:100%;transform:translateX(-50%)}
-.product-motion-feature-slot{flex:0 0 var(--tile-width);height:100%}
-.product-motion-feature-slot.is-wide{flex-basis:var(--wide-tile-width)}
-.product-motion-feature-slot.is-centre{flex:0 0 auto;aspect-ratio:16/9}
+/* WebKit's max-content flex sizing omits basis-only empty slots. Explicit
+   widths keep the centered track's intrinsic size equal to its visible tiles. */
+.product-motion-feature-slot{flex:0 0 auto;width:var(--tile-width);height:100%}
+.product-motion-feature-slot.is-wide{width:var(--wide-tile-width)}
+.product-motion-feature-slot.is-centre{width:auto;aspect-ratio:16/9}
 .product-motion-feature-layer{position:absolute;z-index:14;inset:0;pointer-events:none}
 .product-motion-feature-tile{position:absolute;margin:0;overflow:hidden;contain:layout paint;background:#f8f6f1}
 .product-motion-feature-tile:not(.is-centre){transform-origin:0 0;will-change:transform}

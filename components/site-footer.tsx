@@ -15,6 +15,7 @@ const exploreLinks: FooterLink[] = [
   { label: "About Us", href: "/about" },
   { label: "Our Craft", href: "/craft" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Community & CSR", href: "/csr/challengers-trophy-2026" },
   { label: "Contact", href: "/contact" }
 ];
 

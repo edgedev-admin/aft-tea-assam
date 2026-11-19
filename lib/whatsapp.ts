@@ -21,7 +21,7 @@ export function whatsappContextForPath(pathname: string, productName?: string): 
   return { kind: "general" };
 }
 
-export function whatsappUrl(contact: Pick<BusinessContact, "international">, context: WhatsAppContext = { kind: "general" }) {
+export function whatsappUrl(contact: Pick<BusinessContact, "international">, context: WhatsAppContext = { kind: "general" }, message?: string) {
   if (!/^[1-9]\d{7,14}$/.test(contact.international)) throw new Error("Use an international phone number containing digits only.");
-  return `https://wa.me/${contact.international}?text=${encodeURIComponent(whatsappMessage(context))}`;
+  return `https://wa.me/${contact.international}?text=${encodeURIComponent(message?.trim() || whatsappMessage(context))}`;
 }

@@ -1,0 +1,27 @@
+{
+  "provenance": {
+    "architecture": "AI-authored virtual exhibition concept, generated with the built-in image tool; not a photograph of AFT premises. No Blender or museum GLB was used.",
+    "photography": "Existing authentic AFT photographs, inserted deterministically. Never passed through image generation.",
+    "direction": "Warm limestone, Assam green, dark timber, satin bronze, concealed architectural illumination. Fixed-view landscape and separately composed portrait pavilion. Empty original display niches receive actual AFT photography. No generated people, tea packets or documentary scenes."
+  },
+  "desktop": {
+    "source": "assets/tea-pavilion/desktop-source.png",
+    "output": "public/3d/pavilion/pavilion-desktop.webp",
+    "width": 1586,
+    "displays": [
+      {"source":"public/images/story/garden-path.jpg","bounds":[494,87,1088,601],"quad":[[494,87],[1088,87],[1088,601],[494,601]],"brightness":0.85},
+      {"source":"public/images/story/fresh-leaf.jpg","bounds":[91,298,445,511],"quad":[[94,304],[439,343],[439,504],[94,509]],"brightness":0.9},
+      {"source":"public/images/story/factory-machinery.jpg","bounds":[1167,331,1497,503],"quad":[[1170,356],[1494,334],[1494,500],[1170,497]],"brightness":0.95}
+    ]
+  },
+  "mobile": {
+    "source": "assets/tea-pavilion/mobile-source.png",
+    "output": "public/3d/pavilion/pavilion-mobile.webp",
+    "width": 768,
+    "displays": [
+      {"source":"public/images/story/garden-path.jpg","bounds":[231,211,756,963],"quad":[[231,211],[756,211],[756,963],[231,963]],"brightness":0.85},
+      {"source":"public/images/story/fresh-leaf.jpg","bounds":[47,332,219,456],"quad":[[49,336],[216,355],[216,454],[49,440]],"brightness":0.9},
+      {"source":"public/images/story/factory-machinery.jpg","bounds":[775,334,949,457],"quad":[[778,354],[946,339],[946,444],[778,456]],"brightness":0.95}
+    ]
+  }
+}

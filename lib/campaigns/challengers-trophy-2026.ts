@@ -4,21 +4,24 @@ export const challengersTrophy = {
   name: "Challengers Trophy 3.0",
   organiser: "Jyoti Jana Kalyan Sangha",
   venue: "Dikom Nahortoli Playground",
-  startDate: "2026-12-08",
-  endDate: "2026-12-11",
+  startDate: "2026-12-09",
+  endDate: "2026-12-12",
+  dates: "9–12 December 2026",
+  finalDate: "12 December 2026",
+  format: "Light Cosco Day & Night Knock-Out Cricket Tournament",
+  performer: "Michel Pator",
   // Keep the archive, but stop enquiry handoffs once the last advertised day ends in Assam.
-  archiveAt: "2026-12-12T00:00:00+05:30",
-  poster: "/images/csr/challengers-trophy-2026/official-poster.jpg",
-  socialImage: "/images/csr/challengers-trophy-2026/social-preview.jpg",
+  archiveAt: "2026-12-13T00:00:00+05:30",
+  socialImage: "/csr/challengers-trophy-2026/opengraph-image",
 } as const;
 
-// Published on the official poster. WhatsApp availability is not independently verified.
+// Supplied event contacts. WhatsApp availability is not independently verified.
 export const eventContacts = [
   { id: "event-contact-1", display: "+91 9127131534", international: "919127131534" },
-  { id: "event-contact-2", display: "+91 9864780298", international: "919864780298" },
+  { id: "event-contact-2", display: "+91 9859098252", international: "919859098252" },
   { id: "event-contact-3", display: "+91 9957250489", international: "919957250489" },
   { id: "event-contact-4", display: "+91 7576865179", international: "917576865179" },
-  { id: "event-contact-5", display: "+91 9101442606", international: "919101442606" },
+  { id: "event-contact-5", display: "+91 9864780298", international: "919864780298" },
 ] as const;
 
 export type EventEnquiryType = "registration" | "sponsorship" | "general";
@@ -35,7 +38,9 @@ export function validateEventEnquiry(input: EventEnquiry): { values: EventEnquir
   if (values.team.length < 2 || values.team.length > 120) errors.team = "Enter your team name (2–120 characters).";
   if (values.person.length < 2 || values.person.length > 100) errors.person = "Enter the contact person’s name (2–100 characters).";
   const digits = values.phone.replace(/\D/g, "");
-  if (!/^\+?[\d ()-]+$/.test(values.phone) || !/^[1-9]\d{9,14}$/.test(digits) || /^(\d)\1+$/.test(digits) || values.phone.length > 24) errors.phone = "Enter a valid phone number, including the country code if needed.";
+  const mobile = digits.length === 12 && digits.startsWith("91") ? digits.slice(2) : digits.length === 11 && digits.startsWith("0") ? digits.slice(1) : digits;
+  if (!/^\+?[\d ()-]+$/.test(values.phone) || (values.phone.startsWith("+") && !/^91\d{10}$/.test(digits)) || !/^[6-9]\d{9}$/.test(mobile) || /^(\d)\1+$/.test(mobile) || values.phone.length > 24) errors.phone = "Enter a valid 10-digit Indian mobile number (+91 optional).";
+  else values.phone = `+91 ${mobile}`;
   return { values, errors };
 }
 
@@ -51,14 +56,14 @@ export function eventHasEnded(now: number = Date.now()) {
 
 export function eventEnquiryMessage(input: EventEnquiry | EventEnquiryType) {
   if (typeof input === "string") {
-    if (input === "sponsorship") return "Hello, I am interested in discussing sponsorship opportunities for Challengers Trophy 3.0 (8–11 December 2026).\n\nPlease share the relevant sponsorship information.\n\nThank you.";
-    if (input === "general") return "Hello, I would like to enquire about Challengers Trophy 3.0 (8–11 December 2026).\n\nPlease share the relevant tournament information and organiser guidance.\n\nThank you.";
+    if (input === "sponsorship") return `Hello, I am interested in discussing sponsorship opportunities for Challengers Trophy 3.0 (${challengersTrophy.dates}).\n\nPlease share the relevant sponsorship information.\n\nThank you.`;
+    if (input === "general") return `Hello, I would like to enquire about Challengers Trophy 3.0 (${challengersTrophy.dates}) at ${challengersTrophy.venue}.\n\nPlease share the relevant tournament information and organiser guidance.\n\nThank you.`;
     if (input !== "registration") throw new Error("Choose a supported event enquiry type.");
-    return "Hello, I would like to enquire about registering my team for Challengers Trophy 3.0 (8–11 December 2026).\n\nPlease confirm available slots, eligibility, registration procedure and payment instructions.";
+    return `Hello, I would like to enquire about team registration for Challengers Trophy 3.0 (${challengersTrophy.dates}).\n\nPlease confirm team availability and provide the official registration and payment instructions.\n\nThank you.`;
   }
   const { values, errors } = validateEventEnquiry(input);
   if (Object.keys(errors).length) throw new Error("Complete the event enquiry fields before continuing.");
-  return `Hello, I would like to enquire about registering my team for Challengers Trophy 3.0.\n\nTeam Name: ${values.team}\nContact Person: ${values.person}\nPhone Number: ${values.phone}\n\nPlease confirm team availability, registration procedure and official payment details.\n\nThank you.`;
+  return `Hello, I would like to enquire about team registration for Challengers Trophy 3.0.\n\nTeam Name: ${values.team}\nContact Person: ${values.person}\nPhone Number: ${values.phone}\n\nTournament: ${challengersTrophy.dates}\nVenue: ${challengersTrophy.venue}\n\nPlease confirm team availability and provide the official registration and payment instructions.\n\nThank you.`;
 }
 
 export function eventWhatsAppUrl(destination: string | null, input: EventEnquiry | EventEnquiryType = "registration", now: number = Date.now()) {

@@ -4,6 +4,9 @@ const isVercelPreview = process.env.VERCEL_ENV === "preview";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    agentUpgrade: "security",
+  },
   images: {
     deviceSizes: [360, 430, 512, 640, 720, 750, 768, 780, 800, 860, 1080, 1440, 1536, 1920],
     qualities: [75, 90],

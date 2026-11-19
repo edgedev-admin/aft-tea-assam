@@ -1,0 +1,61 @@
+{
+  "approach": "Fixed-view 2.5D, precomputed architectural illumination and genuine projected photographs. Interactive models are separate.",
+  "photoSources": [
+    {
+      "source": "public/images/story/garden-path.jpg",
+      "sha256": "46cadf246427e7973135e7cb4c277877f303b7276a722a3db75589ab9adc7672"
+    },
+    {
+      "source": "public/images/story/fresh-leaf.jpg",
+      "sha256": "128167e0cee129cf7c58a22f840076d686cd33be100a93e8a546504617b32e3e"
+    },
+    {
+      "source": "public/images/story/factory-machinery.jpg",
+      "sha256": "2b72ab6b9eafc21b3b22556a64227f3b74a104da52fe5bcffcc184050010a3f4"
+    }
+  ],
+  "outputs": [
+    {
+      "mode": "desktop",
+      "path": "public/3d/pavilion/pavilion-desktop.webp",
+      "bytes": 372154,
+      "format": "webp",
+      "mediaType": "image/webp",
+      "size": 372154,
+      "width": 1586,
+      "height": 992,
+      "space": "srgb",
+      "channels": 3,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": false,
+      "autoOrient": {
+        "width": 1586,
+        "height": 992
+      }
+    },
+    {
+      "mode": "mobile",
+      "path": "public/3d/pavilion/pavilion-mobile.webp",
+      "bytes": 203996,
+      "format": "webp",
+      "mediaType": "image/webp",
+      "size": 203996,
+      "width": 768,
+      "height": 1228,
+      "space": "srgb",
+      "channels": 3,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": false,
+      "autoOrient": {
+        "width": 768,
+        "height": 1228
+      }
+    }
+  ]
+}

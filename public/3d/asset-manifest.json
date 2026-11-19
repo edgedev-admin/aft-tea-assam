@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "revision": "four-view-v2",
+  "purpose": "Interactive product showcase and enquiry generation on existing AFT brand website",
+  "productionReady": false,
+  "notes": [
+    "Technical handoff folder name is not a production approval.",
+    "Physical dimensions unmeasured; top/bottom plain provisional closures.",
+    "No pricing, inventory or commerce integration.",
+    "Decoded artwork memory excludes shared roughness, environment, shadows and renderer buffers."
+  ],
+  "products": [
+    {
+      "id": "ajanta-gold",
+      "name": "Ajanta Gold",
+      "model": "models/ajanta-gold.glb",
+      "poster": "posters/ajanta-gold.webp",
+      "previews": {
+        "front": "previews/ajanta-gold/front.png",
+        "back": "previews/ajanta-gold/back.png",
+        "left": "previews/ajanta-gold/left.png",
+        "right": "previews/ajanta-gold/right.png",
+        "three-quarter": "previews/ajanta-gold/three-quarter.png"
+      },
+      "bytes": 617572,
+      "sha256": "7cc275f253eb7acd5f5722094bca5ce99dc37cf380827b8f72b297d318d46d1f",
+      "posterBytes": 115806,
+      "units": "meters",
+      "up": "+Y",
+      "front": "+Z",
+      "floorY": 0,
+      "modelBoundsMeters": {
+        "width": 0.18954430520534515,
+        "height": 0.2800000011920929,
+        "depth": 0.09488197416067123
+      },
+      "physicalDimensionsVerified": false,
+      "nominalDimensionsMeters": {
+        "width": 0.185,
+        "height": 0.28,
+        "depth": 0.09
+      },
+      "triangles": 12800,
+      "meshes": 6,
+      "embeddedImages": 5,
+      "estimatedDecodedArtworkMiB": 4.44,
+      "referenceCoverage": {
+        "front": true,
+        "back": true,
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": false
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 6,
+        "reimported": true
+      },
+      "reviewStatus": "Agent visual review documented; owner approval pending",
+      "productionReady": false,
+      "limitations": [
+        "Absolute scale unmeasured; height normalized to 0.28m.",
+        "Top/bottom artwork unobserved and left plain.",
+        "Residual photographic lighting and side-panel seam differences remain."
+      ]
+    },
+    {
+      "id": "ajanta-elaichi",
+      "name": "Ajanta Elaichi",
+      "model": "models/ajanta-elaichi.glb",
+      "poster": "posters/ajanta-elaichi.webp",
+      "previews": {
+        "front": "previews/ajanta-elaichi/front.png",
+        "back": "previews/ajanta-elaichi/back.png",
+        "left": "previews/ajanta-elaichi/left.png",
+        "right": "previews/ajanta-elaichi/right.png",
+        "three-quarter": "previews/ajanta-elaichi/three-quarter.png"
+      },
+      "bytes": 656224,
+      "sha256": "f9e60762d8a41fbf0cfad9eb1aef6c33d88f235a6b9b31474f54f4239158c82b",
+      "posterBytes": 96770,
+      "units": "meters",
+      "up": "+Y",
+      "front": "+Z",
+      "floorY": 0,
+      "modelBoundsMeters": {
+        "width": 0.1632699966430664,
+        "height": 0.2800000011920929,
+        "depth": 0.06865599751472473
+      },
+      "physicalDimensionsVerified": false,
+      "nominalDimensionsMeters": {
+        "width": 0.16,
+        "height": 0.28,
+        "depth": 0.065
+      },
+      "triangles": 12800,
+      "meshes": 6,
+      "embeddedImages": 5,
+      "estimatedDecodedArtworkMiB": 5.25,
+      "referenceCoverage": {
+        "front": true,
+        "back": true,
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": false
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 6,
+        "reimported": true
+      },
+      "reviewStatus": "Agent visual review documented; owner approval pending",
+      "productionReady": false,
+      "limitations": [
+        "Absolute scale unmeasured; height normalized to 0.28m.",
+        "Top/bottom artwork unobserved and left plain.",
+        "Residual photographic lighting and side-panel seam differences remain."
+      ]
+    },
+    {
+      "id": "ajanta-high-societea",
+      "name": "Ajanta High Societea",
+      "model": "models/ajanta-high-societea.glb",
+      "poster": "posters/ajanta-high-societea.webp",
+      "previews": {
+        "front": "previews/ajanta-high-societea/front.png",
+        "back": "previews/ajanta-high-societea/back.png",
+        "left": "previews/ajanta-high-societea/left.png",
+        "right": "previews/ajanta-high-societea/right.png",
+        "three-quarter": "previews/ajanta-high-societea/three-quarter.png"
+      },
+      "bytes": 699320,
+      "sha256": "059169ff22ad2b5a83c4a4cf6f21765ac50e499dc2a7b11e068869a96dfa8182",
+      "posterBytes": 132400,
+      "units": "meters",
+      "up": "+Y",
+      "front": "+Z",
+      "floorY": 0,
+      "modelBoundsMeters": {
+        "width": 0.18136288970708847,
+        "height": 0.2800000011920929,
+        "depth": 0.04557762295007706
+      },
+      "physicalDimensionsVerified": false,
+      "nominalDimensionsMeters": {
+        "width": 0.18,
+        "height": 0.28,
+        "depth": 0.043
+      },
+      "triangles": 12800,
+      "meshes": 6,
+      "embeddedImages": 5,
+      "estimatedDecodedArtworkMiB": 4.86,
+      "referenceCoverage": {
+        "front": true,
+        "back": true,
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": false
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 6,
+        "reimported": true
+      },
+      "reviewStatus": "Agent visual review documented; owner approval pending",
+      "productionReady": false,
+      "limitations": [
+        "Absolute scale unmeasured; height normalized to 0.28m.",
+        "Top/bottom artwork unobserved and left plain.",
+        "Residual photographic lighting and side-panel seam differences remain."
+      ]
+    },
+    {
+      "id": "ajanta-kolkata-street-masala-chai",
+      "name": "Ajanta Kolkata Street Masala Chai",
+      "model": "models/ajanta-kolkata-street-masala-chai.glb",
+      "poster": "posters/ajanta-kolkata-street-masala-chai.webp",
+      "previews": {
+        "front": "previews/ajanta-kolkata-street-masala-chai/front.png",
+        "back": "previews/ajanta-kolkata-street-masala-chai/back.png",
+        "left": "previews/ajanta-kolkata-street-masala-chai/left.png",
+        "right": "previews/ajanta-kolkata-street-masala-chai/right.png",
+        "three-quarter": "previews/ajanta-kolkata-street-masala-chai/three-quarter.png"
+      },
+      "bytes": 713772,
+      "sha256": "b1b25c8f19a052d54565ccf56f75a2cd267a5dabf465ad589be831cec154fc83",
+      "posterBytes": 93562,
+      "units": "meters",
+      "up": "+Y",
+      "front": "+Z",
+      "floorY": 0,
+      "modelBoundsMeters": {
+        "width": 0.18492180109024048,
+        "height": 0.2800000011920929,
+        "depth": 0.0371880903840065
+      },
+      "physicalDimensionsVerified": false,
+      "nominalDimensionsMeters": {
+        "width": 0.184,
+        "height": 0.28,
+        "depth": 0.035
+      },
+      "triangles": 12800,
+      "meshes": 6,
+      "embeddedImages": 5,
+      "estimatedDecodedArtworkMiB": 7.36,
+      "referenceCoverage": {
+        "front": true,
+        "back": true,
+        "left": true,
+        "right": true,
+        "top": false,
+        "bottom": false
+      },
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 6,
+        "reimported": true
+      },
+      "reviewStatus": "Agent visual review documented; owner approval pending",
+      "productionReady": false,
+      "limitations": [
+        "Absolute scale unmeasured; height normalized to 0.28m.",
+        "Top/bottom artwork unobserved and left plain.",
+        "Residual photographic lighting and side-panel seam differences remain."
+      ]
+    }
+  ]
+}

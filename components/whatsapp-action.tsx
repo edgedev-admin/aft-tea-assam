@@ -13,7 +13,7 @@ export function WhatsAppContactLink({ contact, productName }: { contact: Busines
   return <a className={styles.direct} href={whatsappUrl(contact, whatsappContextForPath(pathname, productName))} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${contact.label}: ${contact.display}`} title={`WhatsApp ${contact.label}`}><SiWhatsapp aria-hidden="true" size={17} /></a>;
 }
 
-export function WhatsAppAction({ className = "", children = "WhatsApp our team", productName }: { className?: string; children?: ReactNode; productName?: string }) {
+export function WhatsAppAction({ className = "", children = "WhatsApp our team", productName, message }: { className?: string; children?: ReactNode; productName?: string; message?: string }) {
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -46,7 +46,7 @@ export function WhatsAppAction({ className = "", children = "WhatsApp our team",
       <p className={styles.eyebrow}>AFT Techno Trade</p>
       <h2 id={`${id}-title`}>Talk to our team.</h2>
       <p>Choose a business contact to continue in WhatsApp. Your message will be ready to review before you send it.</p>
-      <div className={styles.choices}>{businessContacts.map((contact) => <a key={contact.id} href={whatsappUrl(contact, context)} target="_blank" rel="noopener noreferrer" onClick={close}><SiWhatsapp aria-hidden="true" size={22} /><span><strong>WhatsApp {contact.label}</strong><small>{contact.display}</small></span></a>)}</div>
+      <div className={styles.choices}>{businessContacts.map((contact) => <a key={contact.id} href={whatsappUrl(contact, context, message)} target="_blank" rel="noopener noreferrer" onClick={close}><SiWhatsapp aria-hidden="true" size={22} /><span><strong>WhatsApp {contact.label}</strong><small>{contact.display}</small></span></a>)}</div>
     </dialog>
   </>;
 }

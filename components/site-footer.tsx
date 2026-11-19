@@ -21,6 +21,7 @@ const exploreLinks: FooterLink[] = [
 
 const teaLinks: FooterLink[] = [
   { label: "All Teas", href: "/teas" },
+  { label: "Tea Studio", href: "/tea-studio" },
   { label: "Nahorchukbari", href: "/teas#nahorchukbari" },
   { label: "Ekoratoli", href: "/teas#ekoratoli" },
   { label: "Ajanta Tea", href: "/teas#ajanta-tea" },

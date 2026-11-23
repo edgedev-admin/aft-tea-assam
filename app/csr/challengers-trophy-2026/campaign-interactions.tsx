@@ -155,17 +155,19 @@ export function CampaignInteractions() {
 export function EventRegistration() {
   const { archived, draft, edit, markFormOpen, open } = useContacts();
   const hydrated = useSyncExternalStore(subscribeHydration, clientSnapshot, serverSnapshot), formRef = useRef<HTMLFormElement>(null);
+  const intentObserved = useRef(false);
   const [errors, setErrors] = useState<EventErrors>({});
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); if (archived || !hydrated || eventHasEnded()) return;
     const result = validateEventEnquiry(draft); setErrors(result.errors); const first = Object.keys(result.errors)[0];
     if (first) { formRef.current?.querySelector<HTMLInputElement>(`[name="${first}"]`)?.focus(); return; }
-    track("form_validation_success", "form"); open(result.values, "form", formRef.current?.querySelector<HTMLButtonElement>('button[type="submit"]') ?? undefined);
+    if (!intentObserved.current) { track("form_validation_success", "form"); intentObserved.current = true; }
+    open(result.values, "form", formRef.current?.querySelector<HTMLButtonElement>('button[type="submit"]') ?? undefined);
   }
   const fields = [{ key: "team", label: "Team Name", autoComplete: "organization", max: 120 }, { key: "person", label: "Contact Person Name", autoComplete: "name", max: 100 }, { key: "phone", label: "Phone Number", autoComplete: "tel", max: 24 }] as const;
   if (archived) return <div className={styles.notice} role="status"><strong>This tournament is now an archive.</strong><p>Registration enquiries are closed. Tournament details remain available for reference.</p></div>;
-  return <form className={styles.form} ref={formRef} onSubmit={submit} method="post" noValidate onFocus={event => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) markFormOpen("form"); }}>
-    <fieldset disabled={!hydrated}><legend className={styles.srOnly}>Team registration enquiry · all three fields required</legend><div className={styles.formGrid}>{fields.map(field => <label className={styles.field} key={field.key}><span>{field.label}<span aria-hidden="true">*</span></span><input id={`event-${field.key}`} name={field.key} value={draft[field.key]} onChange={event => edit(field.key, event.currentTarget.value)} type={field.key === "phone" ? "tel" : "text"} inputMode={field.key === "phone" ? "tel" : "text"} autoComplete={field.autoComplete} maxLength={field.max} required aria-invalid={Boolean(errors[field.key])} aria-describedby={errors[field.key] ? `event-${field.key}-error` : undefined} />{errors[field.key] && <span id={`event-${field.key}-error`} className={styles.error}>{errors[field.key]}</span>}</label>)}</div>
+  return <form className={styles.form} ref={formRef} onSubmit={submit} method="post" noValidate>
+    <fieldset disabled={!hydrated}><legend className={styles.srOnly}>Team registration enquiry · all three fields required</legend><div className={styles.formGrid}>{fields.map(field => <label className={styles.field} key={field.key}><span>{field.label}<span aria-hidden="true">*</span></span><input id={`event-${field.key}`} name={field.key} value={draft[field.key]} onChange={event => { markFormOpen("form"); intentObserved.current = false; edit(field.key, event.currentTarget.value); }} type={field.key === "phone" ? "tel" : "text"} inputMode={field.key === "phone" ? "tel" : "text"} autoComplete={field.autoComplete} maxLength={field.max} required aria-invalid={Boolean(errors[field.key])} aria-describedby={errors[field.key] ? `event-${field.key}-error` : undefined} />{errors[field.key] && <span id={`event-${field.key}-error`} className={styles.error}>{errors[field.key]}</span>}</label>)}</div>
       {Object.keys(errors).length > 0 && <p className={styles.errorSummary} role="alert">Please check the highlighted fields.</p>}<button className={styles.primary} type="submit" aria-haspopup="dialog">Continue to WhatsApp <ArrowRight size={18} aria-hidden="true" /></button>
     </fieldset>
     <p className={styles.privacy}>Details only prepare your WhatsApp message. No website submission or storage. Organiser confirmation required. <Link href="/privacy">Privacy notice</Link>.</p>

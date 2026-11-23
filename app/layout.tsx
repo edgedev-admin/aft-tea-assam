@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { organizationData, SITE_URL } from "../lib/seo";
 import { StructuredData } from "../components/structured-data";
+import { MetaPixel } from "../components/meta-pixel";
 import "./base.css";
 import "./mobile-optimizations.css";
 import "./responsive-polish.css";
@@ -37,4 +38,4 @@ export const metadata: Metadata = {
     images: ["/images/tea/assam-dawn.png"]
   }
 };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body className={`${inter.variable} ${playfair.variable} ${aftEnglishLogo.variable} ${aftAssameseLogo.variable}`}><a className="skip-link" href="#main">Skip to content</a><StructuredData data={organizationData} />{children}</body></html>; }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body className={`${inter.variable} ${playfair.variable} ${aftEnglishLogo.variable} ${aftAssameseLogo.variable}`}><a className="skip-link" href="#main">Skip to content</a><StructuredData data={organizationData} />{children}<MetaPixel /></body></html>; }

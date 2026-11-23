@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 
         <section><h2>Storage and retention</h2><div className="legal-copy"><p>The website does not intentionally store enquiry messages in its own application database. Information may remain in Resend delivery records, hosting and security logs, and the recipient email inbox.</p><p>No fixed company retention period has been approved for this website. Information should be kept only for as long as reasonably needed to handle the enquiry, maintain necessary business or legal records, resolve disputes and protect the service. AFT Techno Trade must approve and implement a documented retention and deletion schedule.</p></div></section>
 
-        <section><h2>Cookies and analytics</h2><div className="legal-copy"><p>The audited website code does not install optional analytics, advertising pixels or marketing cookies. The hosting platform may still create security, delivery and access logs needed to operate the service. If analytics, advertising or other non-essential tracking is introduced, this notice and any required consent controls must be updated before that technology is enabled.</p></div></section>
+        <section><h2>Cookies and advertising measurement</h2><div className="legal-copy"><p>If you allow advertising measurement, the website loads Meta Pixel to measure advertising visits and selected interactions. Meta may set or read its own cookies and process technical browser, device, page and event data under its own terms. AFT does not send enquiry form values, phone numbers, names, email addresses or WhatsApp message contents to Meta Pixel.</p><p>Advertising measurement is optional. It is inactive until you choose “Allow advertising measurement” and can be withdrawn at any time using the Privacy choices control shown on the website. Declining does not affect the website, enquiry forms or WhatsApp registration flow.</p><p>Meta Pixel is configured to record page views and limited Challengers Trophy campaign interactions, including viewing the campaign page, beginning the registration form, validated intent to choose a WhatsApp contact and the website&apos;s WhatsApp handoff. These interactions do not confirm an event registration, payment or message delivery.</p></div></section>
 
         <section><h2>Security</h2><div className="legal-copy"><p>The form uses server-side validation, size limits, same-origin checks, spam controls, provider timeouts and non-cacheable API responses. Vercel and Resend credentials are intended to remain server-side. No internet transmission or storage method can be guaranteed completely secure, and operational access, credential rotation and provider settings remain company responsibilities.</p></div></section>
 
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
 
         <section><h2>Children and updates</h2><div className="legal-copy"><p>This business enquiry website is not directed to children. Do not submit another person&apos;s information unless you are authorised to do so.</p><p>Material changes to this notice should be posted on this page with an updated date. Where law or the nature of a change requires a more direct notice or renewed consent, AFT Techno Trade should provide it before the changed processing begins.</p></div></section>
       </div>
-      <p className="legal-updated">Draft last reviewed: 20 October 2026.</p>
+      <p className="legal-updated">Draft last reviewed: 23 November 2026.</p>
     </main>
     <SiteFooter />
   </div>;
